@@ -416,6 +416,7 @@
                 ModalShow: false,
                 ModalMark: false,
                 ModalMsg: "",
+                KeyShow:false,
                 timestamp:bill.timestamp,
                 price: bill.price,
                 category: bill.category,
@@ -453,7 +454,6 @@
                 var lables = document.getElementsByClassName('category-name');
                 for (i = 0; i < lables.length; i++) {
                     if(lables[i].innerText == this.$data.category){
-                        console.log(this.$data.category);
                         lables[i].setAttribute('class', 'category-name category-on');
                     }
                 }
@@ -486,6 +486,16 @@
                         this.$data.price = 0;
                     }
                 }
+            },
+            delBill:function(){
+                var billList = JSON.parse(localStorage.billList);
+                for (i = 0; i < billList.length; i++) {
+                    if (billList[i].timestamp == this.$route.params.timestamp) {
+                        billList.splice(i,1);
+                    }
+                }
+                localStorage.billList = JSON.stringify(billList);
+                router.go('/chart');
             },
             doThis: function() {
                 if (this.$data.price == 0) {
@@ -557,7 +567,7 @@
             '</div>' +
             '</div>' +
             '<div class="mui-content add-page">' +
-            '<div class="add-price-box"><span class="add-price">￥{{price}}</span></div>' +
+            '<div class="add-price-box" v-touch="tap:KeyShow = true"><span class="add-price">￥{{price}}</span></div>' +
             '<div class="add-category">' +
             '<ul>' +
             '<li class="category-item" v-repeat="c in categoryList" v-touch="tap:setCategory"><div><div data="{{c.id}}" class="category-name">{{c.name}}</div></li>' +
@@ -574,7 +584,11 @@
             '<div class="">{{marked}}</div>' +
             '</div>' +
             '</div>' +
-            '<div class="add-input-box">' +
+            '<div class="add-btn-box" v-if="!KeyShow">'+
+                '<div><button v-touch="tap:delBill">删除</button></div>'+
+                '<div><button class="mui-btn mui-btn-success" v-touch="tap:doThis">保存</button></div>'+
+            '</div>'+
+            '<div class="add-input-box" v-if="KeyShow">' +
             '<ul class="add-input-num">' +
             '<li v-repeat="num in inputNum" v-touch="tap:inputThis"><span>{{num}}</span></li>' +
             '<li><span>$</span></li>' +
@@ -582,7 +596,7 @@
             '<ul class="add-input-tool">' +
             '<li v-touch="tap:delThis"><span>X</span></li>' +
             '<li><span>+</span></li>' +
-            '<li v-touch="tap:doThis"><span>确定</span></li>' +
+            '<li v-touch="tap:KeyShow = false"><span>确定</span></li>' +
             '</ul>' +
             '</div>' +
 

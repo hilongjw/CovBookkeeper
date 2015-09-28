@@ -447,3 +447,22 @@
     position: absolute;
     left: 20px;
 }
+
+.add-btn-box {
+    width: 100%;
+    height: 3rem;
+    position: fixed;
+    bottom: 0px;
+}
+
+.add-btn-box > div {
+    width: 50%;
+    float: left;
+    text-align: center;
+    height: 100%;
+}
+
+.add-btn-box > div > button{
+        width: 80%;
+    font-size: 1rem;
+}
