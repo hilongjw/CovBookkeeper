@@ -390,3 +390,60 @@
 .category-item .category-on {
     background-color: #ba68c8;
 }
+
+.add-time {
+    float: right;
+    margin: 20px 10px;
+    position: relative;
+    width: 100%;
+}
+
+.add-time > div {
+    float: right;
+    margin-left: 10px;
+}
+
+.add-time-btn {
+    width: 6rem;
+    height: 2rem;
+    position: relative;
+}
+
+.add-time-btn label {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #BBB;
+    position: absolute;
+    color: #7D7D7D;
+}
+
+.add-time-btn input {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+}
+
+.add-mark-box {}
+
+.add-mark-btn {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #BBB;
+    top: 0px;
+    right: 7rem;
+    width: 6rem;
+    text-align: center;
+    color: #7D7D7D;
+}
+
+.add-marked-box {
+    line-height: 2rem;
+    color: #7D7D7D;
+    position: absolute;
+    left: 20px;
+}
