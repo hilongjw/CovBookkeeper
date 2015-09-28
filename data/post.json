@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "user":{
+        	"name":"bj欧",
+        	"avatar":"img/guimi.png"
+        	},
+        "img":[{"src":"img/testimg3.png"},{"src":"img/testimg6.png"}],
+        "txt": "我曾养成一个每拍一张小品就写一首小诗的习惯。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。",
+        "time":"2015-11-2",
+        "praised":5,
+        "comment":[
+        	{
+        		"user":{
+		        	"name":"bj欧",
+		        	"avatar":"img/guimi.png"
+		        	},
+		        "txt":"不错不错"
+        	},
+        	{
+        		"user":{
+		        	"name":"bj欧",
+		        	"avatar":"img/guimi.png"
+		        	},
+		        "txt":"不错不错"
+        	}
+        ]
+
+        }
+    
+]

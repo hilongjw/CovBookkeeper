@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app-base.css" />
+		<style type="text/css">
+			html,
+			body,
+			.mui-content {
+				height: 100%;
+				width: 100%;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-top: 0px;
+			}
+			.header {
+				background-color: rgba(0, 0, 0, 0);
+				background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 100%);
+				background-repeat: repeat-x;
+				box-shadow: none;
+			}
+			.me-bg-box {
+				background: url(../../img/testimg3.png);
+				width: 100%;
+				height: 200px;
+			}
+			.me-bg {
+				background: url(../../img/testimg3.png);
+				width: 100%;
+				height: 100%;
+				-webkit-filter: blur(2px);
+				background-repeat: no-repeat;
+				background-size: 120%;
+				background-position: center;
+			}
+			.user-box {
+				position: absolute;
+				width: 100%;
+				top: 0px;
+				height: 200px;
+			}
+			.user-avatar {
+				background-image: url(../../img/guimi.png);
+				width: 50px;
+				height: 50px;
+				background-size: cover;
+				border-radius: 50px;
+				position: absolute;
+				bottom: 10px;
+				left: 20px;
+				border: 1px solid #fff;
+			}
+			.user-name {
+				color: #fff;
+				font-size: 1rem;
+				margin: 5px 0;
+				position: absolute;
+				bottom: 30px;
+				left: 80px;
+			}
+			.article-time {
+				color: #fff;
+				font-size: 0.8rem;
+				position: absolute;
+				bottom: 10px;
+				left: 80px;
+			}
+			.article-title {
+				color: #fff;
+				font-size: 1.2rem;
+				position: absolute;
+				bottom: 80px;
+				left: 20px;
+			}
+			.user-word {
+				color: #fff;
+				font-size: 1rem;
+				margin: 5px 0;
+			}
+			.user-list>ul>li {
+				padding: 15px 50px;
+				font-size: 1rem;
+			}
+			.article {
+				background-color: #fff;
+				font-size: 1rem;
+				padding: 10px 20px;
+			}
+			.article img {
+				width: 100%;
+			}
+			.article-comment-box {
+				width: 100%;
+				padding-bottom: 40px;
+			}
+			.article-comment-box>ul {
+				padding: 20px;
+				margin: 0;
+				width: 100%;
+				list-style: none;
+				background-color: #fff;
+			}
+			.article-comment-box>ul>li {
+				position: relative;
+				width: 100%;
+				min-height: 60px;
+				border: 1px solid rgba(1, 1, 1, 0);
+				border-bottom: 1px solid #EFEFEF;
+			}
+			.comment-ava {
+				background-image: url(../../img/boodin-icon.png);
+				width: 40px;
+				height: 40px;
+				background-size: cover;
+				border-radius: 25px;
+				position: absolute;
+				top: 10px;
+				left: 10px;
+			}
+			.comment-name {
+				font-size: 1rem;
+				position: absolute;
+				top: 10px;
+				left: 60px;
+			}
+			.comment-word {
+				color: #ACACB4;
+				font-size: 0.8rem;
+				margin-top: 35px;
+				margin-left: 60px;
+				padding-bottom: 20px;
+			}
+			.add-comment {
+				background-image: url(../../img/word.png);
+				background-size: cover;
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				bottom: 5px;
+				right: 40px;
+			}
+			.heart-comment {
+				background-image: url(../../img/heart.png);
+				background-size: cover;
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				bottom: 5px;
+				right: 0px;
+			}
+			.comment-time {
+				position: absolute;
+				bottom: 5px;
+				left: 60px;
+			}
+			.new-comment {
+				border-top: 1px solid #EFEFEF;
+				position: fixed;
+				height: 40px;
+				width: 100%;
+				background-color: #fff;
+				bottom: 0px;
+			}
+			.new-comment input {
+				width: 80%;
+				border: none;
+			}
+			.new-comment button {
+				width: 20%;
+				position: absolute;
+				height: 40px;
+				background-color: #fff;
+				border: none;
+				border-left: 1px solid #76EEFF;
+				color: #76EEFF;
+			}
+			.mui-content {
+				opacity: 0;
+			}
+		</style>
+		<script src="../../js/mui.min.js"></script>
+	</head>
+
+	<body>
+		<header class="header mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title"></h1>
+		</header>
+		<div class="mui-content">
+			<div class="me-bg-box">
+				<div class="me-bg"></div>
+			</div>
+			<div class="user-box">
+				<div class="article-title">阳山避暑，又见花间</div>
+				<div class="user-avatar"></div>
+				<div class="user-name">摄影师白杰</div>
+				<div class="article-time">2015-08-26</div>
+			</div>
+			<div class="article">
+				<p>（如需转载，请联系作者） 本教程为【旅途中的风光人像全攻略（上）-拍摄篇】的后续教程，欢迎在作者主页阅读上篇。 欢迎一切形式的提问，讨论，交流以及建议 </p> <img src="../../img/testimg3.png" />
+				<p>风光人像在拍摄上相对其他题材来说，具有一定难度，但是对于比较用心的摄影来说，并不会存在太大压力。在之前一篇教程中，笔者简要介绍了拍摄风光人像以及慢门人像所需要做的准备工作和拍摄过程。当完成拍摄，旅行结束回到家中以后，我们就需要考虑如何将拍摄的照片进行下一步的加工了。</p>
+				<p> 有许多人都问过，为什么不能直接对人物进行长曝呢？一般来说，让人物在睡姿或者坐姿保持几秒不动并不困难。但是如果有风吹动了头发，那么片子也就毁了，所以最保险的方式还是人物和环境分开拍，后期合成。合成的方式很简单，相信大家看了接下来的教程就会明白。但是前期拍摄的时候一定要用稳固的三脚架，这样可以免除后期对齐画面的苦恼。<img src="../../img/zhengjian.jpg"> 相信看过笔者之前的后期教程的朋友们应该记得那些教程中反复强调的三点： ·对一张照片需要有个目标,也就是说,要清楚自己想要的效果。
+					·对达到这种效果需要有一个明确的思路,要知道自己每一步到底在做什么。 ·解决技术上的问题。 目录： 1. 基本合成 2. 调色定调 3. 画面精修 1. 基本合成 在明确了以上三点之后，我们就可以进入修图的过程了。这里要进行讲解的是最基本的两张照片合成以及后期的方法。 照片1 （光圈：f10 快门：1/20 ISO：100） <img src="../../img/guimi.png">照片2 （光圈：f10 快门75秒 ISO：100，使用ND1000滤镜） 接下来第一步是将两张图片都放入PS。将环境图作为背景，在人物图上建立蒙版。
+					图4 （蒙版的概念简单介绍一下：白色代表本图层可见区域，蒙版上的黑色代表本图层不可见区域。如果你要将图层内容擦掉的话，只需要用黑色画笔在白色蒙版上擦除就可以了。这比橡皮擦工具好的一点是，可以随时再用白色画笔修正擦除了的内容。） 这里因为人物的占得面积比较小，所以选中蒙版，用Ctrl+i 翻转蒙版，然后用白色画笔将人物大致擦出来。（当然你也可以直接摁住ALT+点击建立黑色蒙版） 图5 擦蒙版的时候，将人物下方的石头区域也一起擦出来一些，这样人物的阴影就自然地投在石头上了。而因为两张曝光程度几乎一样，所以石头部分可以很自然地融合到一起。
+					图6 </p>
+			</div>
+			<div class="article-comment-box">
+				<ul>
+					<li>
+						<div class="comment-ava"></div>
+						<div class="comment-name">葫芦娃</div>
+						<div class="comment-word">
+							<p>23333333333333333</p>
+							<div class="comment-time">4小时前</div>
+							<div class="add-comment"></div>
+							<div class="heart-comment"></div>
+						</div>
+					</li>
+					<li>
+						<div class="comment-ava"></div>
+						<div class="comment-name">葫芦娃</div>
+						<div class="comment-word">
+							<p>这样真的好吗</p>
+							<div class="comment-time">4小时前</div>
+							<div class="add-comment"></div>
+							<div class="heart-comment"></div>
+						</div>
+					</li>
+					<li>
+						<div class="comment-ava"></div>
+						<div class="comment-name">葫芦娃</div>
+						<div class="comment-word">
+							<p>这样真的好吗这样真的好吗这样真的好吗这样真的好吗这样真的好吗这样真的好吗这样真的好吗</p>
+							<div class="comment-time">4小时前</div>
+							<div class="add-comment"></div>
+							<div class="heart-comment"></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="new-comment">
+				<input type="text" placeholder="想要说点什么..." />
+				<button class="pushComment">提交</button>
+			</div>
+		</div>
+		<div class="boodin-loading" style="display: none;"></div>
+		<script>
+			(function init() {
+				document.getElementsByClassName('mui-content')[0].style.opacity="0";
+				document.getElementsByClassName('boodin-loading')[0].style.display = '';
+				mui.init({
+					preloadPages: [{
+						url: '../user/user.html',
+						id: 'user'
+					}]
+				});
+			})();
+			(function goUser() {
+				document.getElementsByClassName('user-avatar')[0].addEventListener('click', function() {
+					mui.openWindow({
+						id: 'user',
+						show: {
+							autoShow: true,
+							aniShow: "pop-in",
+							duration: '300'
+						}
+					});
+				});
+			})();
+			 //添加newId自定义事件监听
+			window.addEventListener('get', function(event) {
+				//获得事件参数
+				var id = event.detail.fireid;
+				//根据id向服务器请求新闻详情
+				getArticle(id - 1);
+			});
+
+			function getArticle(i) {
+				mui.ajax('../../data/article.json', {
+					data: {},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						document.getElementsByClassName('article-title')[0].innerText = data[i].title;
+						document.getElementsByClassName('article')[0].innerHTML = data[i].article;
+						document.getElementsByClassName('mui-content')[0].style.opacity="1";
+						document.getElementsByClassName('boodin-loading')[0].style.display = 'none';
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/app-base.css" />
+		<style type="text/css">
+			.boodin-flow {
+				width: 100%;
+			}
+			.boodin-flow>ul {
+				list-style: none;
+				padding: 0 10px;
+				margin: 0px;
+			}
+			.boodin-flow>ul>li {
+				min-height: 60px;
+				background: #fff;
+				padding: 10px 0px;
+				margin: 5px 0;
+				border-radius: 2px;
+				box-shadow: 0 1px 4px rgba(212, 212, 212, 0.62);
+			}
+			.item-ava {
+				width: 40px;
+				height: 40px;
+			}
+			.item-ava>div {
+				background: url(../img/ava.png) no-repeat;
+				background-size: 100% 100%;
+				width: 40px;
+				height: 40px;
+				border-radius: 20px;
+			}
+			.item-hd {
+				position: relative;
+				padding-left: 10px;
+			}
+			.item-user {
+				position: absolute;
+				left: 60px;
+				top: 0px;
+				font-size: 16px;
+			}
+			.item-time-timer {
+				background: url(../img/timer.png);
+				background-size: 15px 15px;
+				width: 15px;
+				height: 15px;
+			}
+			.item-time {
+				position: absolute;
+				left: 60px;
+				top: 26px;
+				font-size: 1.2rem;
+				width: 120px;
+				font-size: 15px;
+				color: #ACACB4;
+			}
+			.item-time>div,
+			.item-time>span {
+				float: left;
+				line-height: 16px;
+				margin-right: 5px;
+			}
+			.item-bd {
+				padding: 10px 0 0 0px;
+			}
+			.magic-img-1>.mbox-img1 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 200px;
+				background-position: center;
+				background-size: 100%;
+			}
+			.magic-img-4 {
+				display: flex;
+				flex-flow: row wrap;
+			}
+			.magic-img-4>.mbox-img1 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 160px;
+				background-position: center;
+				background-size: 100%;
+				width: 49.5%;
+			}
+			.magic-img-4>.mbox-img2 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 160px;
+				background-position: center;
+				background-size: 100%;
+				margin-left: 1%;
+				width: 49.5%;
+			}
+			.magic-img-4>.mbox-img3 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 160px;
+				background-position: center;
+				background-size: 100%;
+				width: 49.5%;
+				margin-top: 1vw;
+			}
+			.magic-img-4>.mbox-img4 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 160px;
+				background-position: center;
+				background-size: 100%;
+				margin-left: 1%;
+				width: 49.5%;
+				margin-top: 1vw;
+			}
+			.magic-img-9 {
+				display: flex;
+				flex-flow: row wrap;
+			}
+			.magic-img-9>.mbox-img1 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				width: 32.7%;
+			}
+			.magic-img-9>.mbox-img2 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				margin-left: 0.8%;
+				width: 32.7%;
+			}
+			.magic-img-9>.mbox-img3 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				margin-left: 0.8%;
+				width: 32.7%;
+			}
+			.magic-img-9>.mbox-img4 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				width: 32.7%;
+				margin-top: 1vw;
+			}
+			.magic-img-9>.mbox-img5 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				margin-left: 0.8%;
+				width: 32.7%;
+				margin-top: 1vw;
+			}
+			.magic-img-9>.mbox-img6 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				margin-left: 0.8%;
+				width: 32.7%;
+				margin-top: 1vw;
+			}
+			.magic-img-9>.mbox-img7 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				width: 32.7%;
+				margin-top: 1vw;
+			}
+			.magic-img-9>.mbox-img8 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				margin-left: 0.8%;
+				width: 32.7%;
+				margin-top: 1vw;
+			}
+			.magic-img-9>.mbox-img9 {
+				background: url(../img/testimg.png);
+				background-repeat: no-repeat;
+				height: 31vw;
+				background-position: center;
+				background-size: 100%;
+				margin-left: 0.8%;
+				width: 32.7%;
+				margin-top: 1vw;
+			}
+			.item-txt-box {
+				padding: 10px;
+			}
+			.icon-heart {
+				background: url(../img/heart.png);
+				width: 22px;
+				height: 22px;
+				background-size: 100% 100%;
+			}
+			.icon-heart-active {
+				background: url(../img/heart-active.png);
+				width: 22px;
+				height: 22px;
+				background-size: 100% 100%;
+			}
+			.icon-word {
+				background: url(../img/word.png);
+				width: 22px;
+				height: 22px;
+				background-size: 100% 100%;
+			}
+			.item-ft {
+				height: 30px;
+				padding: 5px;
+			}
+			.item-right-box {
+				float: right;
+			}
+			.praise>div,
+			.praise>span {
+				float: left;
+				margin-right: 10px;
+				color: #ACACB4;
+				line-height: 22px;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="header mui-bar mui-bar-nav">
+			<button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+				西华大学 <span class="mui-icon mui-icon-arrowdown"></span>
+			</button>
+			<button class="nav-btn mui-btn mui-btn-link mui-btn-nav mui-pull-right">
+				<span class="mui-icon din-icon-camera"></span>
+			</button>
+			<h1 id="title" class="mui-title">布丁</h1>
+		</header>
+		<div class="mui-content">
+			<div class="boodin-flow">
+				<ul>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-1">
+								<div class="mbox-img1"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+								<div class="mbox-img5"></div>
+								<div class="mbox-img6"></div>
+								<div class="mbox-img7"></div>
+								<div class="mbox-img8"></div>
+								<div class="mbox-img9"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-1">
+								<div class="mbox-img1"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+								<div class="mbox-img5"></div>
+								<div class="mbox-img6"></div>
+								<div class="mbox-img7"></div>
+								<div class="mbox-img8"></div>
+								<div class="mbox-img9"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-1">
+								<div class="mbox-img1"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+								<div class="mbox-img5"></div>
+								<div class="mbox-img6"></div>
+								<div class="mbox-img7"></div>
+								<div class="mbox-img8"></div>
+								<div class="mbox-img9"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-1">
+								<div class="mbox-img1"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+								<div class="mbox-img5"></div>
+								<div class="mbox-img6"></div>
+								<div class="mbox-img7"></div>
+								<div class="mbox-img8"></div>
+								<div class="mbox-img9"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-1">
+								<div class="mbox-img1"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+								<div class="mbox-img5"></div>
+								<div class="mbox-img6"></div>
+								<div class="mbox-img7"></div>
+								<div class="mbox-img8"></div>
+								<div class="mbox-img9"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-1">
+								<div class="mbox-img1"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+								<div class="mbox-img5"></div>
+								<div class="mbox-img6"></div>
+								<div class="mbox-img7"></div>
+								<div class="mbox-img8"></div>
+								<div class="mbox-img9"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-1">
+								<div class="mbox-img1"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-4">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+								<div class="mbox-img4"></div>
+								<div class="mbox-img5"></div>
+								<div class="mbox-img6"></div>
+								<div class="mbox-img7"></div>
+								<div class="mbox-img8"></div>
+								<div class="mbox-img9"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感，我曾养成一个每拍一张小品就写一首小诗的习惯，至今坚持，积累了百余首。这一张照片拍摄在一片普通的不能再普通的荒草地，这样的落叶有上千上万片，这其中的一片不久将要腐朽，但是在日落的阳光下，她是那么的美丽妖娆。
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-hd">
+							<div class="item-ava">
+								<div></div>
+							</div>
+							<div class="item-user">白杰萨顶顶</div>
+							<div class="item-time">
+								<div class="item-time-timer"></div><span class="item-time-time">2015-02-23</span>
+							</div>
+						</div>
+						<div class="item-bd">
+							<div class="item-img-box magic-img-9">
+								<div class="mbox-img1"></div>
+								<div class="mbox-img2"></div>
+								<div class="mbox-img3"></div>
+							</div>
+							<div class="item-txt-box">
+								<p>
+									很多时候四两拨千斤的小品出身平凡，但给人很多美感
+								</p>
+							</div>
+						</div>
+						<div class="item-ft">
+							<div class="item-right-box">
+								<div class="praise">
+									<div class="icon-heart">
+									</div>
+									<span id="praiseNum">7</span>
+									<div class="icon-word"></div>
+									<span id="wordNum">3</span>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script>
+			mui.init({
+				preloadPages: [{
+					url: 'boodin/card.html',
+					id: 'card'
+				}]
+			});
+
+			function tapincard() {
+				var liList = document.getElementsByClassName('boodin-flow').getElementsByTagName('li');
+				for (i = 0; i < liList.length; i++) {
+					document.getElementById('info').addEventListener('tap', function() {
+						//打开关于页面
+						mui.openWindow({
+							id: 'info',
+							extras: {
+								id: i //自定义扩展参数，可以用来处理页面间传值
+							},
+							createNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示
+							show: {
+								autoShow: true, //页面loaded事件发生后自动显示，默认为true
+								aniShow: animationType, //页面显示动画，默认为”slide-in-right“；
+								duration: animationTime //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+							},
+							waiting: {
+								autoShow: true, //自动显示等待框，默认为true
+								title: '正在加载...', //等待对话框上显示的提示内容
+								options: {
+									width: waiting - dialog - widht, //等待框背景区域宽度，默认根据内容自动计算合适宽度
+									height: waiting - dialog - height, //等待框背景区域高度，默认根据内容自动计算合适高度
+								}
+							}
+						});
+					});
+				}
+			}
+		</script>
+	</body>
+
+</html>

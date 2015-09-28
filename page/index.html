@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/app-base.css" />
+		<link rel="stylesheet" type="text/css" href="../css/swiper.min.css" />
+		<style type="text/css">
+			.img-box {
+				width: 100%;
+				height: 160px;
+			}
+			.swiper-container {
+				width: 100%;
+				height: 100%;
+			}
+			.swiper-slide {
+				text-align: center;
+				font-size: 18px;
+				background: #000;
+			}
+			.swiper-slide img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				-ms-transform: translate(-50%, -50%);
+				-webkit-transform: translate(-50%, -50%);
+				-moz-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+				position: absolute;
+				left: 50%;
+				top: 50%;
+			}
+			.index-box {
+				background-color: #fff;
+				width: 100%;
+				padding: 10px 0;
+				border-bottom: 1px solid #E0E0E0;
+				margin-bottom: 20px;
+			}
+			.index-box-hd {
+				width: 100%;
+				text-align: center;
+				margin: 10px 0;
+			}
+			.index-box-hd-title {
+				width: 100%;
+				height: 30px;
+				font-size: 1.2rem;
+			}
+			.index-box-hd-word {
+				font-size: 1rem;
+				color: #ACACB4;
+			}
+			.index-box-bd>ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				width: 100%;
+				padding: 0 3%;
+				padding-bottom: 45%;
+			}
+			.index-box-bd>ul>li {
+				width: 27%;
+				height: 0;
+				padding-bottom: 33%;
+				float: left;
+				margin-left: 5%;
+				text-align: center;
+			}
+			.index-box-bd>ul>li>.index-box-bd-img {
+				background-image: url(../img/testimg.png);
+				width: 100%;
+				padding-bottom: 100%;
+				background-size: cover;
+			}
+			.index-box-bd-title {
+				font-size: 1.1rem;
+				margin-top: 8px;
+			}
+			.index-box-bd-word {
+				font-size: 0.8rem;
+				color: #ACACB4;
+			}
+			.index-box2-bd>ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				width: 100%;
+				padding: 0 4%;
+			}
+			.index-box2-bd>ul>li {
+				width: 100%;
+				margin: 0px;
+				height: 0;
+				padding-bottom: 25%;
+				text-align: left;
+				position: relative;
+				margin: 20px 0px;
+			}
+			.index-box2-bd>ul>li>.index-box2-bd-img {
+				background-image: url(../img/testimg.png);
+				width: 35%;
+				padding-bottom: 25%;
+				background-size: cover;
+				float: right;
+				background-repeat: no-repeat;
+			}
+			.index-box2-bd-title {
+				font-size: 1.1rem;
+				margin-top: 8px;
+				height: 2.6rem;
+				overflow: hidden;
+			}
+			.index-box2-bd-word {
+				font-size: 0.8rem;
+				color: #63cedd;
+				position: absolute;
+				bottom: 0px;
+				left: 35px;
+				line-height: 30px;
+			}
+			.index-box2-bd-ava {
+				background-image: url(../img/boodin-icon.png);
+				width: 30px;
+				height: 30px;
+				background-size: contain;
+				border-radius: 15px;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+			}
+			.index-box2-bd-seed {
+				font-size: 0.8rem;
+				color: #ACACB4;
+				position: absolute;
+				bottom: 0px;
+				right: 38%;
+				line-height: 30px;
+			}
+			.magix-box {
+				background-color: #fff;
+				width: 100%;
+				padding: 0;
+				border-bottom: 1px solid #E0E0E0;
+				margin-bottom: 20px;
+				position: relative;
+			}
+			.magix-box-img {
+				background-image: url(../img/testing2.jpg);
+				width: 100%;
+				padding-bottom: 60%;
+			}
+			.magix-box-txt {
+				padding: 10px 10%;
+				font-size: 0.8rem;
+				text-align: center;
+			}
+			.magix-box-title {
+				padding: 10px 15%;
+				font-size: 1rem;
+				text-align: center;
+			}
+			.magix-box-btn {
+				width: 100%;
+				text-align: center;
+				padding: 10px 0;
+			}
+			.magix-btn {
+				border: 1px solid #63cedd;
+				color: #63cedd;
+			}
+			.magix-box-ava {
+				background-image: url(../img/boodin-icon.png);
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+				width: 80px;
+				height: 80px;
+				border-radius: 40px;
+				border: 1px solid #fff;
+				position: absolute;
+				right: 5px;
+				top: 60%;
+			}
+			.magix-box-plus {
+				background-image: url(../img/heart.png);
+				background-size: 100%;
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				top: 20px;
+				right: 20px;
+			}
+		
+		</style>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+	</head>
+
+	<body>
+		<header class="header mui-bar mui-bar-nav">
+			<button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+				西华大学 <span class="mui-icon mui-icon-arrowdown"></span>
+			</button>
+			<h1 id="title" class="mui-title">布丁</h1>
+		</header>
+		<div class="mui-content">
+			<div class="img-box">
+				<!-- Swiper -->
+				<div class="swiper-container">
+					<div id="slider" class="swiper-wrapper">
+						<div class="swiper-slide">
+							<img data-src="../img/slider.png" class="swiper-lazy">
+							<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+						</div>
+						<div class="swiper-slide">
+							<img data-src="../img/testimg3.png" class="swiper-lazy">
+							<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+						</div>
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination swiper-pagination-white"></div>
+					<!-- Navigation -->
+					<!--<div class="swiper-button-next swiper-button-white"></div>
+					<div class="swiper-button-prev swiper-button-white"></div>-->
+				</div>
+			</div>
+			<div class="index-box">
+				<div class="index-box-hd">
+					<div class="index-box-hd-title">
+						<span>花样拍照</span>
+					</div>
+
+					<div class="index-box-hd-word">丰富你的选择</div>
+
+				</div>
+				<div class="index-box-bd">
+					<ul>
+						<li class="classPhoto" fireid="1">
+							<div class="index-box-bd-img" style="background-image: url(../img/xiez.jpg);"></div>
+							<div class="index-box-bd-title">清新</div>
+							<div class="index-box-bd-word">唯有青春的记录</div>
+						</li>
+						<li class="classPhoto" fireid="2">
+							<div class="index-box-bd-img" style="background-image: url(../img/guimi.png);"></div>
+							<div class="index-box-bd-title">姐妹照</div>
+							<div class="index-box-bd-word">唯有青春的记录</div>
+						</li>
+						<li class="classPhoto" fireid="3">
+							<div class="index-box-bd-img" style="background-image: url(../img/zhengjian.jpg);"></div>
+							<div class="index-box-bd-title">证件照</div>
+							<div class="index-box-bd-word">唯有青春的记录</div>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+			<div class="index-box">
+				<div class="index-box-hd">
+					<div class="index-box-hd-title">
+						看他们如何约拍
+					</div>
+				</div>
+				<div class="index-box2-bd">
+					<ul>
+						<li class="articleto" fireid="1">
+							<div class="index-box2-bd-img" style="background-image: url(../img/testing2.jpg);"></div>
+							<div class="index-box2-bd-title">【白杰出品】认识你很高兴，李明睿同学@吉大</div>
+							<div class="index-box2-bd-ava"></div>
+							<div class="index-box2-bd-word">白杰phot</div>
+							<div class="index-box2-bd-seed">666次浏览</div>
+						</li>
+						<li class="articleto" fireid="2">
+							<div class="index-box2-bd-img" style="background-image: url(../img/testimg3.png);"></div>
+							<div class="index-box2-bd-title">时光谣 . 春水初生，春林初盛</div>
+							<div class="index-box2-bd-ava"></div>
+							<div class="index-box2-bd-word">白杰phot</div>
+							<div class="index-box2-bd-seed">666次浏览</div>
+						</li>
+						<li class="articleto" fireid="3">
+							<div class="index-box2-bd-img" style="background-image: url(../img/testimg4.png);"></div>
+							<div class="index-box2-bd-title">后期教程的朋友们应该记得</div>
+							<div class="index-box2-bd-ava"></div>
+							<div class="index-box2-bd-word">白杰photgry</div>
+							<div class="index-box2-bd-seed">666次浏览</div>
+						</li>
+
+					</ul>
+
+				</div>
+			</div>
+			<div class="magix-box">
+				<div class="magix-box-img" id="magixImg"></div>
+				<div class="magix-box-plus" id="magixPlus"></div>
+				<div class="magix-box-ava" id="magixAva"></div>
+				<div class="magix-box-title"><span id="magixTitle">认识你很高兴，李明睿同学</span></div>
+				<!--<div class="magix-box-txt">
+					
+					<p>他把自己喜欢的记录下来希望和一样爱电影的你们一起分享交流电影中的故事，如果你也对电影感兴趣，不妨去他的主页看看</p>
+					
+				</div>-->
+				<div class="magix-box-btn">
+					<button class="magix-btn" id="magixBtn">换一个</button>
+				</div>
+			</div>
+		</div>
+		
+
+		<script type="text/javascript">
+			(function init() {
+				mui.init({
+					preloadPages: [{
+						url: 'index/photolist.html',
+						id: 'photolist',
+						extras: {
+							classId: 1111
+						}
+					}, {
+						url: 'index/article.html',
+						id: 'article',
+						extras: {
+							artid: 1
+						}
+					}]
+				});
+				var classitem = document.getElementsByClassName('classPhoto');
+				for (i = 0; i < classitem.length; i++) {
+					fireto(classitem[i], 'photolist');
+				}
+				var artitem = document.getElementsByClassName('articleto');
+				for (i = 0; i < artitem.length; i++) {
+					fireto(artitem[i], 'article');
+				}
+
+				function fireto(obj, viewid) {
+					var photolistpage = null;
+					obj.addEventListener('tap', function(e) {
+						var id = this.getAttribute('fireid');
+						if (!photolistpage) {
+							photolistpage = plus.webview.getWebviewById(viewid);
+						}
+						mui.fire(photolistpage, 'get', {
+							fireid: id
+						});
+						mui.openWindow({
+							id: viewid,
+							show: {
+								autoShow: true,
+								aniShow: "pop-in",
+								duration: '300'
+							}
+						});
+					});
+				}
+			})();
+			var swiper = new Swiper('.swiper-container', {
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+				pagination: '.swiper-pagination',
+				paginationClickable: true,
+				// Disable preloading of all images
+				preloadImages: false,
+				// Enable lazy loading
+				lazyLoading: true
+			});
+			(function magix() {
+				var mimg = ['../img/testing2.jpg', '../img/testimg.png', '../img/testimg3.png', '../img/testimg4.png'];
+				var mava = ['../img/guimi.png', '../img/xiez.jpg', '../img/zhengjian.jpg', '../img/xiez.jpg'];
+				var mtitle = ['认识你很高兴，李明睿同学', '人像首发', '是一位学生更是位电影爱好者', '一起分享交流电影中的故事'];
+				var magixTitle = document.getElementById('magixTitle');
+				var magixImg = document.getElementById('magixImg');
+				var magixAva = document.getElementById('magixAva');
+				var magixPlus = document.getElementById('magixPlus');
+				var mo = 0;
+				document.getElementById('magixBtn').addEventListener('click', function() {
+					mo++;
+					if (mo > 3) {
+						mo = 0;
+					}
+					magixTitle.innerText = mtitle[mo];
+					magixImg.setAttribute('style', 'background-image: url(' + mimg[mo] + ');');
+					magixAva.setAttribute('style', 'background-image: url(' + mava[mo] + ');');
+				});
+				document.getElementById('magixPlus').addEventListener('click', function() {
+					magixPlus.setAttribute('style', 'background-image: url(../img/heart-active.png);');
+				});
+			})();
+		</script>
+	</body>
+
+</html>

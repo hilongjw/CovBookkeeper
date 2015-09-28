@@ -1,0 +1,38 @@
+{
+    "title": "[摄影服务] 仲夏，七月【小清新户外甜美风】",
+    "price": "499.00",
+    "area": "成都",
+    "description": "套餐包含化妆费用。服装1-2套。底片100-200张。",
+    "time": "3小时",
+    "negative": "80张",
+    "psed": "20张",
+    "dressing": "不提供",
+    "negative_give": "全送",
+    "album": "不提供",
+    "classes": "个性写真",
+    "remark": "",
+    "img": [
+        {
+            "id": 1,
+            "src": "img/testimg3.png"
+        },
+        {
+            "id": 2,
+            "src": "img/testimg4.png"
+        },
+        {
+            "id": 3,
+            "src": "img/xiez.jpg"
+        },
+        {
+            "id": 4,
+            "src": "img/testing2.jpg"
+        }
+    ],
+    "user": {
+        "name": "bjs影像",
+        "avatar": "img/guimi.png",
+        "ordered": "3",
+        "praised": "13"
+    }
+}

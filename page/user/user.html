@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app-base.css" />
+		<style type="text/css">
+			html,
+			body,
+			.mui-content {
+				width: 100%;
+				height: 100%;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-top: 0px;
+			}
+			.header {
+				background-color: rgba(0, 0, 0, 0);
+				background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 100%);
+				background-repeat: repeat-x;
+				box-shadow: none;
+			}
+			.me-bg-box {
+				background: url(../../img/testimg4.png);
+				width: 100%;
+				height: 260px;
+			}
+			.me-bg {
+				background: url(../../img/testimg4.png);
+				width: 100%;
+				height: 260px;
+				-webkit-filter: blur(2px);
+				background-repeat: no-repeat;
+				background-size: 120%;
+				background-position: center;
+			}
+			.mui-content {
+				position: relative;
+			}
+			.user-box {
+				position: absolute;
+				width: 100%;
+				top: 0px;
+				text-align: center;
+			}
+			.user-avatar {
+				background-image: url(../../img/guimi.png);
+				width: 100px;
+				height: 100px;
+				border-radius: 50px;
+				margin: 0px auto;
+				margin-top: 60px;
+				background-size: cover;
+			}
+			.user-name {
+				color: #fff;
+				font-size: 1rem;
+				margin: 5px 0;
+			}
+			.user-word {
+				color: #fff;
+				font-size: 1rem;
+				margin: 5px 0;
+			}
+			.user-word {
+				color: #fff;
+				font-size: 1rem;
+				margin: 5px 0;
+			}
+			.user-list>ul>li {
+				padding: 15px 50px;
+				font-size: 1rem;
+			}
+			.user-img-list {
+				width: 100%;
+				position: relative;
+				padding: 10px;
+			}
+			.user-img-list >ul {
+				padding: 10px;
+				margin: 0;
+				background-color: #fff;
+				list-style: none;
+				-webkit-column-count: 2;
+				-webkit-column-gap: 5px;
+			}
+			.user-img-list >ul>li>img {
+				width: 100%;
+			}
+			.user-img-title {
+				background-color: #fff;
+				padding: 10px 10px 0 10px;
+				font-size: 1rem;
+			}
+			
+		</style>
+		<script src="../../js/mui.min.js"></script>
+	</head>
+
+	<body>
+		<header class="header mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title"></h1>
+		</header>
+		<div class="mui-content">
+			<div class="me-bg-box">
+				<div class="me-bg"></div>
+			</div>
+			<div class="user-box">
+				<div class="user-avatar"></div>
+				<div class="user-name">摄影师白杰</div>
+				<div class="user-word">天晴跑步，下雨听雨</div>
+				<div class="user-word"><span>2 </span> 约拍 | <span>3</span> 赞</div>
+			</div>
+			<div class="user-img-list">
+				<div class="user-img-title">
+					<span>Ta的作品</span>
+				</div>
+				<ul>
+					<li>
+						<img src="../../img/testimg3.png" />
+					</li>
+					<li>
+						<img src="../../img/testimg4.png" />
+					</li>
+					<li>
+						<img src="../../img/guimi.png" />
+					</li>
+					<li>
+						<img src="../../img/testimg.png" />
+					</li>
+					<li>
+						<img src="../../img/testing2.jpg" />
+					</li>
+					<li>
+						<img src="../../img/zhengjian.jpg" />
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="chat-to">
+			<span>在线沟通</span>
+		</div>
+		<script type="text/javascript">
+			(function init() {
+				mui.init({
+					preloadPages: [{
+						url: '../chat/chatto.html',
+						id: 'chatto'
+					}]
+				});
+				document.getElementsByClassName('chat-to')[0].addEventListener('tap',function(){
+					mui.openWindow({
+						id: 'chatto',
+						show: {
+							autoShow: true,
+							aniShow: "pop-in",
+							duration: '300'
+						}
+					});
+				});
+			})();
+			
+		</script>
+	</body>
+
+</html>

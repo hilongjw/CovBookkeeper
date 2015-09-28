@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app-base.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.listpicker.css" />
+		<style type="text/css">
+			.chatto-piker {
+				border: none;
+				padding: 10px;
+				color: #82D5E1;
+			}
+			.chatto-msg{
+				border: none;
+			}
+			.chatto-title{
+				
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="header mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">联系摄影师</h1>
+		</header>
+		<div class="mui-content">
+			<h5 class="mui-content-padded chatto-title">选择约片类型</h5>
+			<button id='showUserPicker' class="mui-btn mui-btn-block chatto-piker" type='button'>选择</button>
+			<h5 class="mui-content-padded chatto-title">跟白杰打个招呼</h5>
+			<textarea class="chatto-msg" name="msg" id="msg" rows="5" cols="20"  placeholder="撰写消息..."></textarea>
+		</div>
+		<div class="chat-to">
+			<span>确认并发送</span>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.listpicker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script>
+			(function init() {
+				mui.init({
+					preloadPages: [{
+						url: '../chat/chat.html',
+						id: 'chatwith'
+					}]
+				});
+				document.getElementsByClassName('chat-to')[0].addEventListener('tap',function(){
+					var msg = document.getElementById('msg').value;	
+					if(msg==''){
+						return;
+					}
+					mui.openWindow({
+						id: 'chatwith',
+						show: {
+							autoShow: true,
+							aniShow: "pop-in",
+							duration: '300'
+						}
+					});
+				});
+			})();
+			(function($, doc) {
+				$.init();
+				$.ready(function() {
+					var userPicker = new $.PopPicker();
+					userPicker.setData([{
+						value: '1',
+						text: '写真照'
+					}, {
+						value: 'aaa',
+						text: '闺蜜照'
+					}, {
+						value: 'lj',
+						text: '证件照'
+					}, {
+						value: 'ymt',
+						text: '毕业照'
+					}]);
+					var showUserPickerButton = doc.getElementById('showUserPicker');
+					var userResult = doc.getElementById('userResult');
+					showUserPickerButton.addEventListener('tap', function(event) {
+						userPicker.show(function(items) {
+							console.log(JSON.stringify(items[0]));
+							document.getElementById('showUserPicker').innerText = items[0].text;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+				});
+			})(mui, document);
+		</script>
+	</body>
+
+</html>

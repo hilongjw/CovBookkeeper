@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/app-base.css" />
+		<style>
+			body,.mui-content{
+				background: #EFEFEF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="header mui-bar mui-bar-nav">
+			<button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+				西华大学 <span class="mui-icon mui-icon-arrowdown"></span>
+			</button>
+			<button id="add" class="nav-btn mui-btn mui-btn-link mui-btn-nav mui-pull-right">
+				<span class="mui-icon din-icon-camera"></span>
+			</button>
+			<h1 id="title" class="mui-title">布丁</h1>
+		</header>
+		<div class="mui-content"></div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script type="text/javascript">
+		//启用双击监听
+		mui.init({
+			gestureConfig:{
+				doubletap:true
+			},
+			subpages:[{
+				url:'flow_sub.html',
+				id:'flow_sub.html',
+				styles:{
+					top: '44px',
+					bottom: '0px',
+				}
+			}],
+			preloadPages: [{
+						url: 'flow/add.html',
+						id: 'add'
+					}]
+		});
+	
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap',function () {
+			console.log(1);
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			if(mui.os.ios){
+				contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+			}else{
+				contentWebview.evalJS('mui.scrollTo(0, 100)');
+			}
+		});
+		document.getElementById('add').addEventListener('tap',function(){
+					
+					mui.openWindow({
+						id: 'add',
+						show: {
+							autoShow: true,
+							aniShow: "pop-in",
+							duration: '300'
+						}
+					});
+				});
+	</script>
+
+</html>

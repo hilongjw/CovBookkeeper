@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app-base.css" />
+		<style type="text/css">
+			.mui-content >ul {
+				padding: 0px;
+				margin: 0px;
+				list-style: none;
+			}
+			.magix-box {
+				background-color: #fff;
+				width: 100%;
+				padding: 0;
+				border-bottom: 1px solid #E0E0E0;
+				position: relative;
+			}
+			.magix-box-img {
+				background-image: url(../../img/testing2.jpg);
+				width: 100%;
+				padding-bottom: 60%;
+			}
+			.magix-box-txt {
+				padding: 0px 10px 5px 10px;
+				font-size: 0.8rem;
+				text-align: left;
+			}
+			.magix-box-title {
+				padding: 10px 0 0 10px;
+				font-size: 1rem;
+				text-align: left;
+			}
+			.magix-box-btn {
+				width: 100%;
+				text-align: center;
+				padding: 10px 0;
+			}
+			.magix-btn {
+				border: 1px solid #63cedd;
+				color: #63cedd;
+			}
+			.magix-box-ava {
+				background-image: url(../../img/ava.png);
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+				width: 80px;
+				height: 80px;
+				border-radius: 40px;
+				border: 1px solid #fff;
+				position: absolute;
+				right: 5px;
+				top: 60%;
+			}
+			.magix-box-plus {
+				background-image: url(../../img/heart.png);
+				background-size: 100%;
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				top: 20px;
+				right: 20px;
+			}
+			.magix-price {
+				color: #63cedd;
+			}
+			.magix-box-txt >.boodin {
+				margin-left: 5px;
+			}
+			.magix-praise {
+				margin-left: 5px;
+			}
+		</style>
+		<script src="../../js/mui.min.js"></script>
+	</head>
+
+	<body>
+		<header class="header mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title"></h1>
+		</header>
+		<div class="mui-content">
+			<ul>
+				<li>
+					<div class="magix-box">
+						<div class="magix-box-img"></div>
+						<div class="magix-box-plus"></div>
+						<div class="magix-box-ava" style="background-image: url(../../img/testimg3.png);"></div>
+						<div class="magix-box-title"><span class="magix-price">免费</span> <span class="grey"> • </span><span id="magixTitle">认识你很高兴，李明睿同学</span></div>
+						<div class="magix-box-txt grey">
+							<span>人像</span><span> • </span><span>风景</span><span class="boodin">★</span><span class="boodin">★</span><span class="boodin">★</span><span class="boodin">★</span><span class="magix-praise">2条评价</span>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<div class="magix-box">
+						<div class="magix-box-img" style="background-image: url(../../img/testimg3.png);"></div>
+						<div class="magix-box-plus"></div>
+						<div class="magix-box-ava" style="background-image: url(../../img/guimi.png);"></div>
+						<div class="magix-box-title"><span class="magix-price">￥50</span> <span class="grey"> • </span><span id="magixTitle">认识你很高兴，李明睿同学</span></div>
+						<div class="magix-box-txt grey">
+							<span>人像</span><span> • </span><span>风景</span><span class="boodin">★</span><span class="boodin">★</span><span class="boodin">★</span><span class="boodin">★</span><span class="magix-praise">2条评价</span>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<div class="magix-box">
+						<div class="magix-box-img" style="background-image: url(../../img/testimg4.png);"></div>
+						<div class="magix-box-plus"></div>
+						<div class="magix-box-ava"></div>
+						<div class="magix-box-title"><span class="magix-price">￥50.1</span> <span class="grey"> • </span><span id="magixTitle">认识你很高兴，李明睿同学</span></div>
+						<div class="magix-box-txt grey">
+							<span>人像</span><span> • </span><span>风景</span><span class="boodin">★</span><span class="boodin">★</span><span class="boodin">★</span><span class="boodin">★</span><span class="magix-praise">2条评价</span>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<div class="magix-box">
+						<div class="magix-box-img" id="magixImg"></div>
+						<div class="magix-box-plus" id="magixPlus"></div>
+						<div class="magix-box-ava" id="magixAva"></div>
+						<div class="magix-box-title"><span class="magix-price">￥50.1</span> <span class="grey"> • </span><span id="magixTitle">认识你很高兴，李明睿同学</span></div>
+						<div class="magix-box-txt grey">
+							<span>人像</span><span> • </span><span>风景</span><span class="boodin">★</span><span class="boodin">★</span><span class="boodin">★</span><span class="boodin">★</span><span class="magix-praise">2条评价</span>
+						</div>
+
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			 //添加newId自定义事件监听
+			window.addEventListener('get', function(event) {
+				//获得事件参数
+				var id = event.detail.fireid;
+				//根据id向服务器请求新闻详情
+				var title = document.getElementById('title');
+				var titles = ['写真照','闺蜜照','证件照']
+				title.innerText = titles[id-1];
+				
+			});
+		</script>
+	</body>
+
+</html>

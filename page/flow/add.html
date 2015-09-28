@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/app-base.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-input-group {
+				margin-top: 10px;
+			}
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			.mui-input-group label {
+				width: 22%;
+			}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+			.user-list>ul>li>a >input {
+				border: none;
+				width: 60vw;
+				margin: 0px;
+				padding: 0px;
+				height: 1.2rem;
+				line-height: 1.2rem;
+				text-align: left;
+				font-size: 1rem;
+			}
+			#items {
+				margin: 0px;
+			}
+			#serviceDetail {
+				margin: 10px 0;
+			}
+			.button-box {
+				bottom: 0px;
+				width: 100%;
+				position: absolute;
+			}
+			.button-box>input {
+				opacity: 0;
+				z-index: 2;
+				position: absolute;
+				bottom: 0px;
+				height: 50px;
+				margin: 0px;
+			}
+			.addimg-box {
+				background-color: #fff;
+				margin-bottom: 10px;
+				position: relative;
+				height: 35vh;
+			}
+			.imgpre {
+				width: 100%;
+				height: 30vh;
+				overflow: auto;
+			}
+			.imgpre>.img-box {
+				float: left;
+				width: 32%;
+				height: 30vw;
+				margin-right: 1%;
+				position: relative;
+			}
+			.img-box>img {
+				width: 100%;
+				min-height: 100%;
+			}
+			#postService {
+				margin: 10px 0;
+				background-color: #FF7527;
+				color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="header mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">新增商品</h1>
+		</header>
+		<div class="mui-content">
+			<div class="addimg-box">
+				<div class="imgpre" id="imgPre">
+					<!-- <div class="img-box">
+                    <div id="popClose" class="buyed-close">×</div>
+                    <img src="img/ava.png" id="imgpre">
+                </div> -->
+				</div>
+				<div class="button-box">
+					<button class="mui-btn mui-btn-block cov-button" onclick="appendByGallery()">添加图片</button>
+				</div>
+			</div>
+			<div class="user-list">
+				<ul class="mui-table-view">
+					
+					<li class="mui-table-view-cell">
+						<a>标题<input type="text" class="mui-pull-right" id="serviceTitle" placeholder="输入标题，10-20字"></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a>价格<input type="number" class="mui-pull-right" id="servicePrice" placeholder="输入价格"></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a>销量<input type="number" class="mui-pull-right" id="saled" placeholder="输入销量"></a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a>介绍</a>
+						<textarea rows="6" cols="20" class="mui-pull-right" id="serviceDetail"></textarea>
+					</li>
+				</ul>
+				<button id="postService" class="mui-btn mui-btn-block cov-button">提交</button>
+			</div>
+		</div>
+		
+		<script src="../../js/mui.min.js"></script>
+		<script>
+			(function putService() {
+				document.getElementById('postService').addEventListener('tap', function() {
+					var serviceTitle = document.getElementById('serviceTitle').value;
+					var servicePrice = document.getElementById('servicePrice').value;
+					var serviceDetail = document.getElementById('serviceDetail').value;
+					var saled = document.getElementById('saled').value;
+					mui.ajax(localStorage.server + 'additem', {
+						data: {
+							name: serviceTitle,
+							price: servicePrice,
+							detail: serviceDetail,
+							saled:saled
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							if (!data.error) {
+								queUp()
+							} else {
+								alert(data.msg);
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+						}
+					});
+				});
+			})();
+
+			function imgRemove(id) {
+				var delit = document.getElementById('imgpre' + id);
+				document.getElementById('imgPre').removeChild(delit);
+				for (i = 0; i < files.length; i++) {
+					if (files[i].key == id) {
+						files.splice(i, 1);
+					}
+				}
+				//alert(JSON.stringify(files));
+			}
+
+			function pop(txt) {
+				document.getElementById('popClose').addEventListener('tap', function() {
+					document.getElementById('pop').style.display = "none";
+				});
+				var pop = document.getElementById('pop').style.display = "block";
+				document.getElementById('popTxt').innerText = txt;
+				setTimeout(function() {
+					document.getElementById('pop').style.display = "none";
+				}, 3000);
+			}
+
+			function queUp() {
+				if (files.length <= 0) {
+					mui.toast("没有添加上传文件！");
+					return;
+				}
+				upload( files.length, 0);
+			}
+			var server = localStorage.server + 'upimg';
+			var files = [];
+			 // 上传文件
+			function upload( num, i) {
+					mui.toast("开始上传");
+					var wt = plus.nativeUI.showWaiting();
+					var task = plus.uploader.createUpload(server, {
+							method: "POST"
+						},
+						function(t, status) { //上传完成
+							if (status == 200) {
+								i++;
+								if (num > i) {
+									mui.toast('成功上传'+i+'张图片')
+									upload(num, i)
+								} else {
+									if (!t.responseText.error) {
+										mui.toast("全部上传成功");
+										
+										location.href="userItem.html";
+									} else {
+										mui.toast("好像出了点问题");
+									}
+								}
+								wt.close();
+							} else {
+								mui.toast("上传失败：" + status);
+								wt.close();
+							}
+						}
+					);
+					var f = files[i];
+					task.addFile(f.path, {
+						key: 'file'
+					});
+					task.start();
+				}
+				// 拍照添加文件
+
+			function appendByCamera() {
+					plus.camera.getCamera().captureImage(function(p) {
+						appendFile(p);
+					});
+				}
+				// 从相册添加文件
+
+			function appendByGallery() {
+					plus.gallery.pick(function(p) {
+						appendFile(p);
+					});
+				}
+				// 添加文件
+			var index = 1;
+
+			function appendFile(p) {
+				var imgPre = document.getElementById('imgPre');
+				picItem = '<div id="imgpre' + index + '" class="img-box"><div onclick="imgRemove(' + index + ')" class="buyed-close">×</div><img src="' + p + '" id="imgpre"></div>';
+				imgPre.innerHTML += picItem;
+				files.push({
+					name: "key" + index,
+					path: p
+				});
+				index++;
+			}
+		</script>
+	</body>
+
+</html>

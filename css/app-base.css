@@ -1,0 +1,30 @@
+.header {
+	background-color: rgb(156, 39, 176);
+	box-shadow: none;
+}
+.header span,
+.header h1,
+.header>a,
+.header>button {
+	color: #fff!important;
+}
+.header .smaller button,.header .smaller span{
+	font-size: 0.8rem!important;
+}
+
+.nav-btn {
+	padding: 6px 6px!important;
+}
+.din-icon-set {
+	background-image: url(../img/set.png);
+	background-size: 100% 100%;
+	width: 26px;
+	height: 26px;
+}
+.grey {
+	color: #ACACB4;
+}
+html,body,#app{
+    height: 100%;
+    width: 100%;
+}
