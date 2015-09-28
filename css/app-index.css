@@ -250,6 +250,30 @@
     position: absolute;
     left: 50px;
 }
+.bill-icon-1{
+    background-color: #3841FF;
+}
+.bill-icon-2{
+    background-color: #FF7F50;
+}
+.bill-icon-3{
+    background-color: #87CEFA;
+}
+.bill-icon-4{
+    background-color: #3841FF;
+}
+.bill-icon-5{
+    background-color: #DA70D6;
+}
+.bill-icon-6{
+    background-color: #7BEFF9;
+}
+.bill-icon-7{
+    background-color: #49F784;
+}
+.bill-icon-8{
+    background-color: #F7E849;
+}
 
 .bill-txt {
     position: absolute;

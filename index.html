@@ -201,7 +201,7 @@
             '<div class="time-line"></div>' +
             '<ul>' +
             '<li v-link="/change/{{bill.timestamp}}" v-repeat="bill in bills">' +
-            '<div class="bill-icon"></div>' +
+            '<div class="bill-icon bill-icon-{{bill.cid}}"></div>' +
             '<div class="bill-txt"><span class="bill-name">{{bill.category}}</span><span class="bill-price">{{bill.price}}</span><span class="bill-mark">{{bill.mark}}</span></div>' +
             '</li>' +
             '</ul>' +
@@ -271,6 +271,7 @@
                 }
                 e.target.setAttribute('class', 'category-on');
                 this.$data.category = e.target.innerText;
+                this.$data.cid = e.target.getAttribute('cid');
             },
             inputThis: function(e) {
                 if (this.$data.price == 0) {
@@ -301,6 +302,7 @@
                     var bday = time.getFullYear() + "/" + (time.getMonth() + 1) + '/' + time.getDate();
 
                     var newbill = {
+                        'cid':this.$data.cid,
                         'category': this.$data.category,
                         'price': this.$data.price,
                         'mark': this.$data.marked,
@@ -367,7 +369,7 @@
             '<div class="add-price-box"><span class="add-price">￥{{price}}</span></div>' +
             '<div class="add-category">' +
             '<ul>' +
-            '<li class="category-item" v-repeat="c in categoryList" v-touch="tap:setCategory"><div><div data="{{c.id}}">{{c.name}}</div></li>' +
+            '<li class="category-item" v-repeat="c in categoryList" v-touch="tap:setCategory"><div><div cid="{{c.id}}">{{c.name}}</div></li>' +
             '</ul>' +
             '</div>' +
             '<div class="add-time">' +
