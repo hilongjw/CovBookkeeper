@@ -106,6 +106,7 @@
                 }
 
             }
+            this.$data.payment = parseFloat(this.$data.payment).toFixed(2);
             for (i = 0; i < this.$data.bills.length; i++) {
                 for (n = 0; n < cdata.length; n++) {
                     if (this.$data.bills[i].category == clist[n]) {
