@@ -214,10 +214,10 @@
             '</div>' +
             '</div>' +
             '<div v-if="showAdd" class="chart-add-box">'+
-                '<div class="chart-add-btn"  v-link="revenue">' +
+                '<div class="chart-add-btn"  v-link="add/revenue">' +
                 '<span>收入</span>' +
                 '</div>' +
-                '<div class="chart-add-btn"  v-link="add">' +
+                '<div class="chart-add-btn"  v-link="add/payment">' +
                 '<span>花费</span>' +
                 '</div>' +
             '</div>'+
@@ -387,22 +387,10 @@
     var Add = Vue.extend({
 
         data: function() {
-
-            var thetime = new Date();
-            return {
-                Index: {
-                    siteInfo: {
-                        sitename: "Bookkeeper"
-                    },
-                },
-                thisTime: thetime,
-                ModalShow: false,
-                ModalMark: false,
-                ModalMsg: "",
-                price: 0,
-                category: "",
-                marked: "",
-                categoryList: [{
+            var categoryList = [];
+            var type = this.$route.params.type;
+            if(type == 'payment'){
+                categoryList = [{
                     "id": 1,
                     "name": "娱乐"
                 }, {
@@ -426,7 +414,42 @@
                 }, {
                     "id": 8,
                     "name": "购物"
-                }],
+                }]
+            }else if(type == 'revenue'){
+                categoryList = [{
+                    "id": 1,
+                    "name": "薪资"
+                }, {
+                    "id": 2,
+                    "name": "收债"
+                }, {
+                    "id": 3,
+                    "name": "借入"
+                }, {
+                    "id": 4,
+                    "name": "奖金"
+                }, {
+                    "id": 5,
+                    "name": "其他"
+                }]
+            }
+
+            var thetime = new Date();
+            return {
+                Index: {
+                    siteInfo: {
+                        sitename: "记录"
+                    },
+                },
+                thisTime: thetime,
+                ModalShow: false,
+                ModalMark: false,
+                ModalMsg: "",
+                price: 0,
+                category: "",
+                marked: "",
+                type:type,
+                categoryList: categoryList,
                 inputNum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '.']
             }
         },
@@ -478,7 +501,7 @@
                         'mark': this.$data.marked,
                         'bday': bday,
                         'timestamp': timestamp,
-                        'type':'payment'
+                        'type':this.$data.type
                     };
                     var billList = [];
                     if (localStorage.billList) {
@@ -991,7 +1014,7 @@
         '/chart': {
             component: Chart
         },
-        '/add': {
+        '/add/:type': {
             component: Add
         },
         '/change/:timestamp': {
@@ -999,9 +1022,6 @@
         },
         '/daily/:day':{
             component: Daily
-        },
-        '/revenue':{
-            component: Revenue
         }
     })
 
