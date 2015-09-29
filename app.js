@@ -106,13 +106,13 @@ billListSchema.statics.findbyid = function(id, callback) {
 
 
 userSchema.statics.findbyusername = function(username, callback) {
-    return this.model('user').find({
+    return this.model('user').findOne({
         username: username
     }, callback);
 }
 
 billSchema.statics.findbyid = function(id, callback) {
-    return this.model('bill').find({
+    return this.model('bill').findOne({
         _id: id
     }, callback);
 }
@@ -163,7 +163,7 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html')
 });
 
-app.get('/addbilllist', function(req, res) {
+app.get('/add/billlist', function(req, res) {
     var name = req.query.name;
 
     db = mongoose.createConnection(dburi);
@@ -188,6 +188,7 @@ app.get('/addbilllist', function(req, res) {
 
 
 });
+
 
 //category
 
@@ -286,6 +287,8 @@ app.get('/get/category/:type', function(req, res) {
 
 });
 
+
+//bill
 app.get('/billlist/:id', function(req, res) {
     var bid = req.params.id;
     db = mongoose.createConnection(dburi);
@@ -301,8 +304,9 @@ app.get('/billlist/:id', function(req, res) {
     });
 
 });
+
 app.get('/all/bill', function(req, res) {
-    // 基于静态方法的查询
+
     db = mongoose.createConnection(dburi);
     billModel.all(function(error, result) {
         if (error) {
@@ -310,7 +314,6 @@ app.get('/all/bill', function(req, res) {
         } else {
             res.send(result);
         }
-        //关闭数据库链接
         db.close();
     });
 })
@@ -327,11 +330,47 @@ app.get('/del/bill/:id', function(req, res) {
         } else {
             res.send('delete ok!');
         }
-        //关闭数据库链接
         db.close();
     });
 })
 
+app.post('/change/bill', function(req, res) {
+
+    var post = req.body;
+
+    db = mongoose.createConnection(dburi);
+
+    var bill= {
+        _id: post.id
+    };
+    var update = {
+        $set: {
+            cid: post.cid,
+            price: post.price,
+            bday: post.bday,
+            bbid: post.bid,
+            bid: post.bid,
+            mark: post.mark,
+            type: post.type
+        }
+    };
+    var options = {
+        upsert: true
+    };
+    billModel.update(bill, update, options, function(error) {
+        if (error) {
+            res.send({
+                error:true
+            });
+        } else {
+            res.send({
+                error:false
+            });
+        }
+        //关闭数据库链接
+        db.close();
+    });
+})
 
 app.post('/add/bill', function(req, res) {
     var post = req.body;
@@ -465,7 +504,7 @@ app.post('/login', function(req, res) {
                     error: true
                 });
             }
-            if (result[0].password == user.password) {
+            if (result.password == user.password) {
                 var md5 = crypto.createHash('md5');
                 var thistime = new Date();
                 md5.update(thistime + '23232322333');
@@ -485,9 +524,9 @@ app.post('/login', function(req, res) {
                     error: false,
                     data: {
                         token: d,
-                        username: result[0].username,
-                        uid: result[0].id,
-                        bid: result[0].bid
+                        username: result.username,
+                        uid: result.id,
+                        bid: result.bid
                     }
                 });
             }
@@ -516,7 +555,7 @@ app.post('/signin', function(req, res) {
                     name: '默认记账本'
                 }
 
-                billListModel.create(blist, function(error,blist) {
+                billListModel.create(blist, function(error, blist) {
                     db.close();
                     if (error) {
                         res.send(error);
@@ -525,7 +564,7 @@ app.post('/signin', function(req, res) {
                             name: user.username,
                             username: user.username,
                             password: user.password,
-                            bid:blist._id
+                            bid: blist._id
                         };
                         userModel.create(doc, function(error) {
                             db.close();

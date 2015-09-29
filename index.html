@@ -217,6 +217,7 @@
                 
                 for(m=0;m<data.length;m++){
                     asynBill.push({
+                        'id':data[m]._id,
                         'cid':data[m].cid.id,
                         'category': data[m].cid.name,
                         'price': data[m].price,
@@ -706,51 +707,7 @@
                 }
             }
             var thetime = new Date(bill.bday);
-            var type = [];
-            if (bill.type == 'payment') {
-                type = [{
-                    "id": 1,
-                    "name": "娱乐"
-                }, {
-                    "id": 2,
-                    "name": "烟酒"
-                }, {
-                    "id": 3,
-                    "name": "零食"
-                }, {
-                    "id": 4,
-                    "name": "交通"
-                }, {
-                    "id": 5,
-                    "name": "话费"
-                }, {
-                    "id": 6,
-                    "name": "餐饮"
-                }, {
-                    "id": 7,
-                    "name": "买菜"
-                }, {
-                    "id": 8,
-                    "name": "购物"
-                }]
-            } else {
-                type = [{
-                    "id": 1,
-                    "name": "薪资"
-                }, {
-                    "id": 2,
-                    "name": "收债"
-                }, {
-                    "id": 3,
-                    "name": "借入"
-                }, {
-                    "id": 4,
-                    "name": "奖金"
-                }, {
-                    "id": 5,
-                    "name": "其他"
-                }]
-            }
+            
             return {
                 Index: {
                     siteInfo: {
@@ -764,22 +721,34 @@
                 KeyShow: false,
                 timestamp: bill.timestamp,
                 price: bill.price,
+                cid:bill.cid,
                 category: bill.category,
                 marked: bill.mark,
                 type: bill.type,
-                categoryList: type,
+                categoryList: [],
                 inputNum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '.']
             }
         },
         asyncData: function(resolve, reject) {
-            this.$nextTick(function() {
-                var lables = document.getElementsByClassName('category-name');
-                for (i = 0; i < lables.length; i++) {
-                    if (lables[i].innerText == this.$data.category) {
-                        lables[i].setAttribute('class', 'category-name category-on');
+
+            this.$http.get('/get/category/' + this.$data.type, function(data, status, request) {
+                resolve({
+                    categoryList: data
+                })
+
+                this.$nextTick(function() {
+                    var lables = document.getElementsByClassName('category-name');
+                    for (i = 0; i < lables.length; i++) {
+                        if (lables[i].innerText == this.$data.category) {
+                            lables[i].setAttribute('class', 'category-name category-on');
+                        }
                     }
-                }
-            })
+                })
+            }).error(function(data, status, request) {
+
+            });
+
+            
         },
         methods: {
             goBack: function(e) {
@@ -792,6 +761,7 @@
                 }
                 e.target.setAttribute('class', 'category-on');
                 this.$data.category = e.target.innerText;
+                this.$data.cid = e.target.getAttribute('cid');
             },
             inputThis: function(e) {
                 if (this.$data.price == 0) {
@@ -829,6 +799,27 @@
                 } else {
                     var time = new Date(this.$data.thisTime);
                     var bday = time.getFullYear() + "-" + (time.getMonth() + 1) + '-' + time.getDate();
+
+                    this.$http.post('/change/bill', {
+                        'id':this.$data.id,
+                        'cid':this.$data.cid,
+                        'price': this.$data.price,
+                        'mark': this.$data.marked,
+                        'bday': bday,
+                        'timestamp': this.$data.timestamp,
+                        'type': this.$data.type
+                    }, function(data, status, request) {
+                        if (data.error) {
+                            console.log('error')
+                        } else {
+                            
+                        }
+
+
+                    }).error(function(data, status, request) {
+
+                    });
+
 
                     var billList = JSON.parse(localStorage.billList);
                     for (i = 0; i < billList.length; i++) {
@@ -893,7 +884,7 @@
             '<div class="add-price-box" v-touch="tap:KeyShow = true"><span class="add-price">￥{{price}}</span></div>' +
             '<div class="add-category">' +
             '<ul>' +
-            '<li class="category-item" v-repeat="c in categoryList" v-touch="tap:setCategory"><div><div data="{{c.id}}" class="category-name">{{c.name}}</div></li>' +
+            '<li class="category-item" v-repeat="c in categoryList" v-touch="tap:setCategory"><div><div cid="{{c._id}}" class="category-name">{{c.name}}</div></li>' +
             '</ul>' +
             '</div>' +
             '<div class="add-time">' +
