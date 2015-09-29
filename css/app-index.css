@@ -530,3 +530,26 @@
     background-color: #50FF7C;
     color: #FFF;
 }
+
+.chart-add-box {
+    position: fixed;
+    bottom: 5rem;
+    right: 10px;
+}
+
+.chart-add-btn {
+    background-color: #909090;
+    bottom: 10px;
+    right: 10px;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 100%;
+    text-align: center;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.34);
+    margin: 10px 0;
+}
+
+.chart-add-btn span {
+    color: #fff;
+    line-height: 4rem;
+}

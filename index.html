@@ -83,6 +83,7 @@
             return {
                 showModal: false,
                 showAddModal: false,
+                showAdd:false,
                 siteInfo: {
                     sitename: "Bookkeeper"
                 },
@@ -96,17 +97,23 @@
             var cdata = [];
 
             for (j = 0; j < this.$data.bills.length; j++) {
-                this.$data.payment += parseFloat(this.$data.bills[j].price);
-                if (clist.indexOf(this.$data.bills[j].category) == -1) {
-                    clist.push(this.$data.bills[j].category);
-                    cdata.push({
-                        'name': this.$data.bills[j].category,
-                        'value': 0
-                    })
+                if(this.$data.bills[j].type == 'payment'){
+                    this.$data.payment += parseFloat(this.$data.bills[j].price);
+                    if (clist.indexOf(this.$data.bills[j].category) == -1) {
+                        clist.push(this.$data.bills[j].category);
+                        cdata.push({
+                            'name': this.$data.bills[j].category,
+                            'value': 0
+                        })
+                    }
+                }else if(this.$data.bills[j].type == 'revenue'){
+                    this.$data.revenue += parseFloat(this.$data.bills[j].price);
                 }
-
             }
+
             this.$data.payment = parseFloat(this.$data.payment).toFixed(2);
+            this.$data.revenue = this.$data.revenue.toFixed(2);
+
             for (i = 0; i < this.$data.bills.length; i++) {
                 for (n = 0; n < cdata.length; n++) {
                     if (this.$data.bills[i].category == clist[n]) {
@@ -160,9 +167,8 @@
             goBack: function(e) {
                 history.go(-1);
             },
-            showAdd: function() {
-                this.$data.showModal = true;
-                this.$data.showAddModal = true;
+            openAdd: function() {
+                this.$data.showAdd = !this.$data.showAdd;
             },
             close: function() {
                 this.$data.showModal = false;
@@ -201,14 +207,22 @@
             '<ul>' +
             '<li  v-repeat="bill in bills">' +
             '<div class="bill-icon bill-icon-{{bill.cid}}"></div>' +
-            '<div class="bill-txt"><span v-link="/change/{{bill.timestamp}}" class="bill-name">{{bill.category}}</span><span class="bill-price">￥{{bill.price}}</span><br/><span class="bill-mark">{{bill.mark}}</span></div>' +
+            '<div class="bill-txt"><span v-link="change/{{bill.timestamp}}" class="bill-name">{{bill.category}}</span><span class="bill-price">￥{{bill.price}}</span><br/><span class="bill-mark">{{bill.mark}}</span></div>' +
             '<div class="bill-time"><span>龙佳文 记录于 <span><span v-link="/daily/{{bill.bday}}">{{bill.bday}}</span></div>'+
             '</li>' +
             '</ul>' +
             '</div>' +
             '</div>' +
-            '<div class="add-box"  v-link="add">' +
-            '<span>＋</span>' +
+            '<div v-if="showAdd" class="chart-add-box">'+
+                '<div class="chart-add-btn"  v-link="revenue">' +
+                '<span>收入</span>' +
+                '</div>' +
+                '<div class="chart-add-btn"  v-link="add">' +
+                '<span>花费</span>' +
+                '</div>' +
+            '</div>'+
+            '<div class="add-box"  v-touch="tap:openAdd">' +
+                '<span>＋</span>' +
             '</div>' +
             '</div>'
 
@@ -458,7 +472,8 @@
                         'price': this.$data.price,
                         'mark': this.$data.marked,
                         'bday': bday,
-                        'timestamp': timestamp
+                        'timestamp': timestamp,
+                        'type':'payment'
                     };
                     var billList = [];
                     if (localStorage.billList) {
@@ -549,6 +564,184 @@
             '</div>'
 
     })
+
+    var Revenue = Vue.extend({
+
+        data: function() {
+
+            var thetime = new Date();
+            return {
+                Index: {
+                    siteInfo: {
+                        sitename: "收入"
+                    },
+                },
+                thisTime: thetime,
+                ModalShow: false,
+                ModalMark: false,
+                ModalMsg: "",
+                price: 0,
+                category: "",
+                marked: "",
+                categoryList: [{
+                    "id": 1,
+                    "name": "薪资"
+                }, {
+                    "id": 2,
+                    "name": "收债"
+                }, {
+                    "id": 3,
+                    "name": "借入"
+                }, {
+                    "id": 4,
+                    "name": "奖金"
+                }, {
+                    "id": 5,
+                    "name": "其他"
+                }],
+                inputNum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '.']
+            }
+        },
+        methods: {
+            goBack: function(e) {
+                history.go(-1);
+            },
+            setCategory: function(e) {
+                var lables = document.getElementsByClassName('category-on');
+                for (i = 0; i < lables.length; i++) {
+                    lables[i].removeAttribute("class");
+                }
+                e.target.setAttribute('class', 'category-on');
+                this.$data.category = e.target.innerText;
+                this.$data.cid = e.target.getAttribute('cid');
+            },
+            inputThis: function(e) {
+                if (this.$data.price == 0) {
+                    this.$data.price = e.target.innerText;
+                } else {
+                    this.$data.price += e.target.innerText;
+                }
+
+            },
+            delThis: function() {
+                if (this.$data.price != 0) {
+                    this.$data.price = this.$data.price.substr(0, this.$data.price.length - 1);
+                    if (this.$data.price.length == 0) {
+                        this.$data.price = 0;
+                    }
+                }
+            },
+            doThis: function() {
+                if (this.$data.price == 0) {
+                    this.$data.ModalShow = true;
+                    this.$data.ModalMsg = '没花钱？';
+                } else if (this.$data.category.length == 0) {
+                    this.$data.ModalShow = true;
+                    this.$data.ModalMsg = '没选择分类';
+                } else {
+                    var timestamp = (new Date()).valueOf();
+                    var time = new Date(this.$data.thisTime);
+                    var bday = time.getFullYear() + "-" + (time.getMonth() + 1) + '-' + time.getDate();
+
+                    var newbill = {
+                        'cid':this.$data.cid,
+                        'category': this.$data.category,
+                        'price': this.$data.price,
+                        'mark': this.$data.marked,
+                        'bday': bday,
+                        'timestamp': timestamp,
+                        'type':'revenue'
+                    };
+                    var billList = [];
+                    if (localStorage.billList) {
+                        billList = JSON.parse(localStorage.billList);
+                    }
+                    billList.push(newbill);
+                    localStorage.billList = JSON.stringify(billList);
+                    this.$data.ModalShow = true;
+                    this.$data.ModalMsg = '已经帮你记好了~';
+                    this.$data.price = 0;
+                    this.$data.category = '';
+                    var lables = document.getElementsByClassName('category-on');
+                    for (i = 0; i < lables.length; i++) {
+                        lables[i].removeAttribute("class");
+                    }
+                }
+            },
+            Modal: function(e, msg) {
+                this.$data.ModalShow = true;
+                this.$data.ModalMsg = msg;
+            },
+            close: function() {
+                this.$data.ModalShow = false;
+            },
+            changeMark: function() {
+                this.$data.ModalShow = true;
+                this.$data.ModalMark = true;
+            },
+            setMark: function() {
+                this.$data.ModalShow = false;
+                this.$data.ModalMark = false;
+            }
+        },
+        template: '<header class="header mui-bar mui-bar-nav"><a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a><h1 id="title" class="mui-title">{{Index.siteInfo.sitename}}</h1></header>' +
+            '<div class="modal-mask" v-if="ModalShow" v-transition="modal">' +
+            '<div class="modal-wrapper">' +
+            '<div class="modal-container" >' +
+            '<button v-touch="tap:close" class="close-modal-btn">×</button>' +
+            '<content select=".modal-header">' +
+            '<div class="modal-header">' +
+            '</div>' +
+            '</content>' +
+            '<content select=".modal-body" v-if="!ModalMark">' +
+            '<div class="modal-body">' +
+            '<p>{{ModalMsg}}</p>' +
+            '<button class="doned-btn" v-on="click:ModalShow = false "> OK </button>' +
+            '</div>' +
+            '</content>' +
+            '<content select=".modal-body" v-if="ModalMark">' +
+            '<div class="modal-body">' +
+            '<input class="doned-input" v-model="marked" autofocus="autofocus">' +
+            '<button class="doned-btn" v-on="click:setMark "> Done </button>' +
+            '</div>' +
+            '</content>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="mui-content add-page">' +
+            '<div class="add-price-box"><span class="add-price">￥{{price}}</span></div>' +
+            '<div class="add-category">' +
+            '<ul>' +
+            '<li class="category-item" v-repeat="c in categoryList" v-touch="tap:setCategory"><div><div cid="{{c.id}}">{{c.name}}</div></li>' +
+            '</ul>' +
+            '</div>' +
+            '<div class="add-time">' +
+            '<div class="add-time-btn">' +
+            '<label for="addingtime">{{thisTime | time2Day}}</label><input id="addingtime" type="date" v-model="thisTime"/>' +
+            '</div>' +
+            '<div class="add-mark-box">' +
+            '<div class="add-mark-btn" v-touch="tap:changeMark">添加备注</div>' +
+            '</div>' +
+            '<div class="add-marked-box">' +
+            '<div class="">{{marked}}</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="add-input-box">' +
+            '<ul class="add-input-num">' +
+            '<li v-repeat="num in inputNum" v-touch="tap:inputThis"><span>{{num}}</span></li>' +
+            '<li><span>$</span></li>' +
+            '</ul>' +
+            '<ul class="add-input-tool">' +
+            '<li v-touch="tap:delThis"><span>X</span></li>' +
+            '<li><span>+</span></li>' +
+            '<li v-touch="tap:doThis"><span>确定</span></li>' +
+            '</ul>' +
+            '</div>' +
+
+            '</div>'
+
+    })
+
     var Change = Vue.extend({
 
         data: function() {
@@ -560,22 +753,9 @@
                 }
             }
             var thetime = new Date(bill.bday);
-            return {
-                Index: {
-                    siteInfo: {
-                        sitename: "Bookkeeper"
-                    },
-                },
-                thisTime: thetime,
-                ModalShow: false,
-                ModalMark: false,
-                ModalMsg: "",
-                KeyShow:false,
-                timestamp:bill.timestamp,
-                price: bill.price,
-                category: bill.category,
-                marked: bill.mark,
-                categoryList: [{
+            var type = [];
+            if(bill.type == 'payment'){
+                type = [{
                     "id": 1,
                     "name": "娱乐"
                 }, {
@@ -599,7 +779,42 @@
                 }, {
                     "id": 8,
                     "name": "购物"
-                }],
+                }]
+            }else{
+                type = [{
+                    "id": 1,
+                    "name": "薪资"
+                }, {
+                    "id": 2,
+                    "name": "收债"
+                }, {
+                    "id": 3,
+                    "name": "借入"
+                }, {
+                    "id": 4,
+                    "name": "奖金"
+                }, {
+                    "id": 5,
+                    "name": "其他"
+                }]
+            }
+            return {
+                Index: {
+                    siteInfo: {
+                        sitename: "Bookkeeper"
+                    },
+                },
+                thisTime: thetime,
+                ModalShow: false,
+                ModalMark: false,
+                ModalMsg: "",
+                KeyShow:false,
+                timestamp:bill.timestamp,
+                price: bill.price,
+                category: bill.category,
+                marked: bill.mark,
+                type:bill.type,
+                categoryList: type,
                 inputNum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '.']
             }
         },
@@ -670,7 +885,8 @@
                                 'price': this.$data.price,
                                 'mark': this.$data.marked,
                                 'bday': bday,
-                                'timestamp':this.$data.timestamp
+                                'timestamp':this.$data.timestamp,
+                                'type':this.$data.type
                             }
                         }
                     }
@@ -778,6 +994,9 @@
         },
         '/daily/:day':{
             component: Daily
+        },
+        '/revenue':{
+            component: Revenue
         }
     })
 
