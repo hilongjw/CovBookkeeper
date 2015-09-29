@@ -125,7 +125,7 @@
                     self.$nextTick(function() {
                         var myChart = require('echarts').init(document.getElementById('chart'));
                         myChart.setOption({
-                            backgroundColor: 'rgb(156, 39, 176)',
+                            backgroundColor: '#3f51b5',
                             calculable: false,
                             tooltip: {
                                 trigger: 'item',
@@ -198,11 +198,162 @@
             '</div>' +
             '</div>' +
             '<div class="chart-list">' +
-            '<div class="time-line"></div>' +
             '<ul>' +
-            '<li v-link="/change/{{bill.timestamp}}" v-repeat="bill in bills">' +
+            '<li  v-repeat="bill in bills">' +
             '<div class="bill-icon bill-icon-{{bill.cid}}"></div>' +
-            '<div class="bill-txt"><span class="bill-name">{{bill.category}}</span><span class="bill-price">{{bill.price}}</span><span class="bill-mark">{{bill.mark}}</span></div>' +
+            '<div class="bill-txt"><span v-link="/change/{{bill.timestamp}}" class="bill-name">{{bill.category}}</span><span class="bill-price">￥{{bill.price}}</span><br/><span class="bill-mark">{{bill.mark}}</span></div>' +
+            '<div class="bill-time"><span>龙佳文 记录于 <span><span v-link="/daily/{{bill.bday}}">{{bill.bday}}</span></div>'+
+            '</li>' +
+            '</ul>' +
+            '</div>' +
+            '</div>' +
+            '<div class="add-box"  v-link="add">' +
+            '<span>＋</span>' +
+            '</div>' +
+            '</div>'
+
+    })
+    
+    var Daily = Vue.extend({
+
+        data: function() {
+            var billList = [];
+            var DailyList = [];
+            var theDay = this.$route.params.day;
+            if (localStorage.billList) {
+                billList = JSON.parse(localStorage.billList);
+                billList.reverse();
+                for(i=0;i<billList.length;i++){
+                    if(billList[i].bday == theDay){
+                        DailyList.push(billList[i]);
+                    }
+                }
+                
+            }
+
+            return {
+                showModal: false,
+                showAddModal: false,
+                siteInfo: {
+                    sitename: this.$route.params.day
+                },
+                bills: DailyList,
+                payment: 0,
+                revenue: 0
+            }
+        },
+        asyncData: function(resolve, reject) {
+            var clist = [];
+            var cdata = [];
+
+            for (j = 0; j < this.$data.bills.length; j++) {
+                this.$data.payment += parseFloat(this.$data.bills[j].price);
+                if (clist.indexOf(this.$data.bills[j].category) == -1) {
+                    clist.push(this.$data.bills[j].category);
+                    cdata.push({
+                        'name': this.$data.bills[j].category,
+                        'value': 0
+                    })
+                }
+
+            }
+            this.$data.payment = parseFloat(this.$data.payment).toFixed(2);
+            for (i = 0; i < this.$data.bills.length; i++) {
+                for (n = 0; n < cdata.length; n++) {
+                    if (this.$data.bills[i].category == clist[n]) {
+                        cdata[n].value = cdata[n].value + parseFloat(this.$data.bills[i].price);
+                    }
+                }
+
+            }
+            var self = this;
+
+            setTimeout(function() {
+                self.$http.get('data/servicelist.json', function(data, status, request) {
+                    resolve({
+
+                    })
+                    self.$nextTick(function() {
+                        var myChart = require('echarts').init(document.getElementById('chart'));
+                        myChart.setOption({
+                            backgroundColor: '#3f51b5',
+                            calculable: false,
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{b} : {c} ({d}%)"
+                            },
+                            calculable: true,
+                            series: [{
+                                type: 'pie',
+                                radius: ['50%', '70%'],
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: true
+                                        },
+                                        labelLine: {
+                                            show: true
+                                        }
+                                    }
+                                },
+                                data: cdata
+                            }]
+                        });
+                    });
+
+                }).error(function(data, status, request) {
+
+                });
+
+            }, 1000)
+        },
+        methods: {
+            goBack: function(e) {
+                history.go(-1);
+            },
+            showAdd: function() {
+                this.$data.showModal = true;
+                this.$data.showAddModal = true;
+            },
+            close: function() {
+                this.$data.showModal = false;
+                this.$data.showAddModal = false;
+            }
+        },
+        template: '<header class="header mui-bar mui-bar-nav"><a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a><button class="mui-btn mui-btn-link mui-btn-nav mui-pull-right"><span></span></button><h1 id="title" class="mui-title">{{siteInfo.sitename}}</h1></header>' +
+            '<div class="modal-mask" v-if="showModal" v-transition="modal">' +
+            '<div class="modal-wrapper">' +
+            '<div class="modal-container" v-if="showAddModal">' +
+            '<button v-touch="tap:close" class="close-modal-btn">×</button>' +
+            '<content select=".modal-header">' +
+            '<div class="modal-header">' +
+            '添加' +
+            '</div>' +
+            '</content>' +
+            '<content select=".modal-body">' +
+            '<div class="modal-body">' +
+            '<input class="doned-input" v-model="itemname" autofocus="autofocus">' +
+            '<button class="doned-btn" v-on="click:add "> Done </button>' +
+            '</div>' +
+            '</content>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="mui-content chart-page">' +
+            '<div class="chart">' +
+            '<div class="chart-box">' +
+            '<div id="chart"></div>' +
+            '<div class="chart-txt">' +
+            '<div class="chart-txt-left"><span>收入 ￥{{revenue}}</span></div>' +
+            '<div class="chart-txt-left"><span>支出 ￥{{payment}}</span></div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="chart-list">' +
+            '<ul>' +
+            '<li  v-repeat="bill in bills">' +
+            '<div class="bill-icon bill-icon-{{bill.cid}}"></div>' +
+            '<div class="bill-txt"><span v-link="/change/{{bill.timestamp}}" class="bill-name">{{bill.category}}</span><span class="bill-price">￥{{bill.price}}</span><br/><span class="bill-mark">{{bill.mark}}</span></div>' +
+            '<div class="bill-time"><span>龙佳文 记录于 <span><span>{{bill.bday}}</span></div>'+
             '</li>' +
             '</ul>' +
             '</div>' +
@@ -299,7 +450,7 @@
                 } else {
                     var timestamp = (new Date()).valueOf();
                     var time = new Date(this.$data.thisTime);
-                    var bday = time.getFullYear() + "/" + (time.getMonth() + 1) + '/' + time.getDate();
+                    var bday = time.getFullYear() + "-" + (time.getMonth() + 1) + '-' + time.getDate();
 
                     var newbill = {
                         'cid':this.$data.cid,
@@ -509,7 +660,7 @@
                     this.$data.ModalMsg = '没选择分类';
                 } else {
                     var time = new Date(this.$data.thisTime);
-                    var bday = time.getFullYear() + "/" + (time.getMonth() + 1) + '/' + time.getDate();
+                    var bday = time.getFullYear() + "-" + (time.getMonth() + 1) + '-' + time.getDate();
 
                     var billList = JSON.parse(localStorage.billList);
                     for (i = 0; i < billList.length; i++) {
@@ -588,8 +739,8 @@
             '</div>' +
             '</div>' +
             '<div class="add-btn-box" v-if="!KeyShow">'+
-                '<div><button v-touch="tap:delBill">删除</button></div>'+
-                '<div><button class="mui-btn mui-btn-success" v-touch="tap:doThis">保存</button></div>'+
+                '<div><button class="md-btn" v-touch="tap:delBill">删除</button></div>'+
+                '<div><button class="md-btn md-btn-success" v-touch="tap:doThis">保存</button></div>'+
             '</div>'+
             '<div class="add-input-box" v-if="KeyShow">' +
             '<ul class="add-input-num">' +
@@ -624,6 +775,9 @@
         },
         '/change/:timestamp': {
             component: Change
+        },
+        '/daily/:day':{
+            component: Daily
         }
     })
 

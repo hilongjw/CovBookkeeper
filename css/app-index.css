@@ -205,7 +205,7 @@
 .chart-box {
     height: 100%;
     width: 100%;
-    background-color: #9C27B0;
+    background-color: #3f51b5;
     position: relative;
 }
 
@@ -231,78 +231,103 @@
 
 .chart-list ul {
     margin: 0px;
-    padding: 0px;
     list-style: none;
+    padding: 1rem 0.5rem;
 }
 
 .chart-list ul li {
     position: relative;
-    height: 2rem;
+    height: 6rem;
     width: 100%;
-    margin: 1rem 0;
+    margin: 0 0 1rem 0;
+    background-color: #fff;
 }
 
 .bill-icon {
     background-color: #FF8383;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
+    width: 4rem;
+    height: 6rem;
     position: absolute;
-    left: 50px;
 }
-.bill-icon-1{
+
+.bill-icon-1 {
     background-color: #3841FF;
 }
-.bill-icon-2{
+
+.bill-icon-2 {
     background-color: #FF7F50;
 }
-.bill-icon-3{
+
+.bill-icon-3 {
     background-color: #87CEFA;
 }
-.bill-icon-4{
+
+.bill-icon-4 {
     background-color: #3841FF;
 }
-.bill-icon-5{
+
+.bill-icon-5 {
     background-color: #DA70D6;
 }
-.bill-icon-6{
+
+.bill-icon-6 {
     background-color: #7BEFF9;
 }
-.bill-icon-7{
+
+.bill-icon-7 {
     background-color: #49F784;
 }
-.bill-icon-8{
+
+.bill-icon-8 {
     background-color: #F7E849;
 }
 
 .bill-txt {
-    position: absolute;
-    left: 100px;
-    line-height: 2rem;
+    position: relative;
+    line-height: 3rem;
 }
 
 .bill-txt span {
-    margin: 0px 5px;
-    line-height: 2rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 .bill-mark {
-    color: #A2A2A2;
-    font-size: 0.8rem!important;
+    color: #999999;
+    font-size: 1rem!important;
+    position: absolute;
+    left: 5rem;
+    top: 1.5rem;
+}
+
+.bill-name {
+    position: absolute;
+    top: 0;
+    left: 5rem;
+    height: 2rem;
+    color: #757575;
+}
+
+.bill-price {
+    position: absolute;
+    color: #FF7F50;
+    right: 1rem;
+}
+
+.bill-time {
+    position: absolute;
+    bottom: 0;
+    left: 5rem;
+    height: 2rem;
+}
+
+.bill-time span {
+    line-height: 2rem;
+    font-size: 1rem;
+    color: #999999;
 }
 
 .chart-list {
     position: relative;
-}
-
-.time-line {
-    width: 1px;
-    height: 100%;
-    background-color: #7B7777;
-    position: absolute;
-    left: 65px;
-    top: 0px;
 }
 
 .add-price-box {
@@ -486,7 +511,22 @@
     height: 100%;
 }
 
-.add-btn-box > div > button{
-        width: 80%;
+.add-btn-box > div > button {
+    width: 80%;
     font-size: 1rem;
+}
+
+.md-btn {
+    border: none;
+    box-shadow: 0px 2px 3px rgba(130, 130, 130, 0.46);
+    height: 2.4rem;
+    line-height: 1rem;
+    background-color: #fff;
+    color: #000;
+    border-radius: 2px;
+}
+
+.md-btn-success {
+    background-color: #50FF7C;
+    color: #FFF;
 }
