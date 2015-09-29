@@ -64,11 +64,102 @@
         template: '<header class="header mui-bar mui-bar-nav"><h1 id="title" class="mui-title">{{Index.siteInfo.sitename}}</h1></header>' +
             '<div class="mui-content index-page" style="background-image: url({{Index.bgimg}})">' +
             '<div class="button-box">' +
-            '<button v-link="chart" class="mui-btn go-button">开始记账</button><br>' +
+            '<button v-link="login" class="mui-btn go-button">开始记账</button><br>' +
             '<span></span>' +
             '</div>' +
             '</div>'
 
+    })
+
+    var Login = Vue.extend({
+        ready:function(){
+            
+        },
+        data: function() {
+            return {
+                username: "",
+                password: ""
+            }
+        },
+        template: '<header class="header mui-bar mui-bar-nav hidden-header">' +
+            '<a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
+            '<h1 class="mui-title"></h1>' +
+            '</header>' +
+            '<div class=" mui-content login-page">' +
+            '<form id="login-form" class="mui-input-group">' +
+            '<div class="mui-input-row">'+
+            '<input type="text" class="mui-input-clear mui-input" placeholder="请输入账号" v-model="username">' +
+            '</div>' +
+            '<div class="mui-input-row">' +
+            '<input id="password" type="password" class="mui-input-clear mui-input" placeholder="请输入密码" v-model="password">' +
+            '</div>' +
+            '</form>' +
+
+            '<div class="login-btn-box">' +
+            '<div>'+
+            '<button  v-link="/submit" class="md-btn">注册</button>' +
+            '</div>'+
+            '<div>'+
+            '<button v-on="click:logined" class="md-btn md-btn-success">登录</button>' +
+            '</div>'+
+            '<div class="link-area"><a id="forgetPassword">忘记密码</a>' +
+            '</div>' +
+            '</div>' +
+
+            '</div>',
+        methods: {
+            goBack: function(e) {
+                location.href = '#!/'
+            },
+            logined: function() {
+                localStorage.logined = true;
+                location.href ="#!/chart";
+            }
+        }
+    })
+    var Reg = Vue.extend({
+        ready:function(){
+        },
+        data: function() {
+            return {
+                tel: "",
+                password: "",
+                repassword:""
+            }
+        },
+        template: '<header class="header mui-bar mui-bar-nav service-header">' +
+            '<a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
+            '<h1 class="mui-title"></h1>' +
+            '</header>' +
+            '<div class=" mui-content login-page">' +
+            '<form class="mui-input-group">'+
+                '<div class="mui-input-row">'+
+                    '<label>手机</label>'+
+                    '<input type="text" class="mui-input-clear mui-input" placeholder="请输入手机" v-model="tel">'+
+                '</div>'+
+                '<div class="mui-input-row">'+
+                    '<label>密码</label>'+
+                    '<input type="password" class="mui-input-clear mui-input" placeholder="请输入密码" v-model="password">'+
+                '</div>'+
+                '<div class="mui-input-row">'+
+                    '<label>确认</label>'+
+                    '<input type="password" class="mui-input-clear mui-input" placeholder="请确认密码" v-model="repassword">'+
+                '</div>'+
+            '</form>'+
+            '<div class="submit-btn-box">'+
+                '<button v-on="click:reged" class="md-btn md-btn-success submit-btn">注册</button>'+
+            '</div>'+
+
+            '</div>',
+        methods: {
+            goBack: function(e) {
+                location.href = '#!/'
+            },
+            reged: function() {
+                localStorage.logined = true;
+                location.href ="#!/me";
+            }
+        }
     })
 
     var Chart = Vue.extend({
@@ -132,7 +223,7 @@
                     self.$nextTick(function() {
                         var myChart = require('echarts').init(document.getElementById('chart'));
                         myChart.setOption({
-                            backgroundColor: '#3f51b5',
+                            backgroundColor: '#5677fc',
                             calculable: false,
                             tooltip: {
                                 trigger: 'item',
@@ -161,7 +252,7 @@
 
                 });
 
-            }, 1000)
+            }, 100)
         },
         methods: {
             goBack: function(e) {
@@ -295,7 +386,7 @@
                     self.$nextTick(function() {
                         var myChart = require('echarts').init(document.getElementById('chart'));
                         myChart.setOption({
-                            backgroundColor: '#3f51b5',
+                            backgroundColor: '#5677fc',
                             calculable: false,
                             tooltip: {
                                 trigger: 'item',
@@ -376,9 +467,6 @@
             '</li>' +
             '</ul>' +
             '</div>' +
-            '</div>' +
-            '<div class="add-box"  v-link="add">' +
-            '<span>＋</span>' +
             '</div>' +
             '</div>'
 
@@ -1022,6 +1110,12 @@
         },
         '/daily/:day':{
             component: Daily
+        },
+        '/login':{
+            component: Login
+        },
+        'submit':{
+            component: Reg
         }
     })
 

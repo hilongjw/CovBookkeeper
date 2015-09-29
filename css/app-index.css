@@ -20,7 +20,7 @@
 }
 
 .index-page .go-button {
-    background-color: #FF5722;
+    background-color: #5677fc;
     color: #fff;
     border: none;
     margin-bottom: 10px;
@@ -205,7 +205,7 @@
 .chart-box {
     height: 100%;
     width: 100%;
-    background-color: #3f51b5;
+    background-color: #5677fc;
     position: relative;
 }
 
@@ -241,6 +241,7 @@
     width: 100%;
     margin: 0 0 1rem 0;
     background-color: #fff;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.26);
 }
 
 .bill-icon {
@@ -519,15 +520,15 @@
 .md-btn {
     border: none;
     box-shadow: 0px 2px 3px rgba(130, 130, 130, 0.46);
-    height: 2.4rem;
-    line-height: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
     background-color: #fff;
     color: #000;
     border-radius: 2px;
 }
 
 .md-btn-success {
-    background-color: #50FF7C;
+    background-color: #5677fc;
     color: #FFF;
 }
 
@@ -552,4 +553,71 @@
 .chart-add-btn span {
     color: #fff;
     line-height: 4rem;
+}
+
+.hidden-header {
+    /*background-color: rgba(0,0,0,0);*/
+}
+
+.mui-input-group:before {
+    content: none;
+}
+
+.mui-input-group:after {
+    content: none;
+}
+
+.mui-input-row {
+    border-bottom: 1px;
+}
+
+.mui-input-row input {
+    font-size: 1.2rem;
+}
+
+.login-page .mui-input-group {
+    margin: 40px 10px 10px 10px;
+    border-radius: 2px;
+}
+
+.login-page.mui-input-group:first-child {
+    margin-top: 20px;
+}
+
+.login-page .link-area {
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+.login-page .login-btn {
+    border: none;
+    background-color: #3F51B5;
+    color: #fff;
+}
+
+.login-page {
+    background-color: #fff;
+    height: 100%;
+}
+
+.login-page .link-area a,
+.login-page .link-area span {
+    color: #999999;
+}
+
+.submit-btn-box,.login-btn-box{
+    margin-top:1rem;
+    text-align: center;
+}
+.login-btn-box div {
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+.submit-btn,.login-btn-box button {
+    width: 80%;
+    font-size: 1rem;
 }
