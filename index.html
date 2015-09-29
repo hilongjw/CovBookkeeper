@@ -261,6 +261,7 @@
             var cdata = [];
 
             for (j = 0; j < this.$data.bills.length; j++) {
+                if(this.$data.bills[j].type == 'payment'){
                 this.$data.payment += parseFloat(this.$data.bills[j].price);
                 if (clist.indexOf(this.$data.bills[j].category) == -1) {
                     clist.push(this.$data.bills[j].category);
@@ -269,8 +270,12 @@
                         'value': 0
                     })
                 }
+                }else if(this.$data.bills[j].type == 'revenue'){
+                    this.$data.revenue += parseFloat(this.$data.bills[j].price);
+                }
 
             }
+            this.$data.revenue = this.$data.revenue.toFixed(2);
             this.$data.payment = parseFloat(this.$data.payment).toFixed(2);
             for (i = 0; i < this.$data.bills.length; i++) {
                 for (n = 0; n < cdata.length; n++) {
