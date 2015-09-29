@@ -348,8 +348,6 @@ app.post('/change/bill', function(req, res) {
             cid: post.cid,
             price: post.price,
             bday: post.bday,
-            bbid: post.bid,
-            bid: post.bid,
             mark: post.mark,
             type: post.type
         }
@@ -357,14 +355,17 @@ app.post('/change/bill', function(req, res) {
     var options = {
         upsert: true
     };
-    billModel.update(bill, update, options, function(error) {
+    billModel.update(bill, update, options, function(error,result) {
         if (error) {
             res.send({
-                error:true
+                error:true,
+                data:error
             });
         } else {
             res.send({
-                error:false
+                error:false,
+                post:post,
+                data:result
             });
         }
         //关闭数据库链接
@@ -415,7 +416,7 @@ app.get('/bill/:id', function(req, res) {
         if (error) {
             res.send(error);
         } else {
-            res.send(result[0]);
+            res.send(result);
         }
         //关闭数据库链接
         db.close();

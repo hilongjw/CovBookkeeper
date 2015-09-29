@@ -45,7 +45,7 @@
     var Index = Vue.extend({
 
         data: function() {
-            imgs = ['img/test3.jpg', 'img/test2.jpg', 'img/test1.jpg', 'img/test4.jpg', 'img/test5.jpg', 'img/test6.jpg', 'img/test7.jpg', 'img/test8.jpg', 'img/test9.jpg', 'img/test10.jpg', 'img/test11.jpg', 'img/test12.jpg'];
+            imgs = ['dist/img/test3.jpg', 'dist/img/test2.jpg', 'dist/img/test1.jpg', 'dist/img/test4.jpg', 'dist/img/test5.jpg', 'dist/img/test6.jpg', 'dist/img/test7.jpg', 'dist/img/test8.jpg', 'dist/img/test9.jpg', 'dist/img/test10.jpg', 'dist/img/test11.jpg', 'dist/img/test12.jpg'];
             var cc = Math.round(Math.random() * imgs.length - 1);
             return {
                 Index: {
@@ -707,7 +707,7 @@
                 }
             }
             var thetime = new Date(bill.bday);
-            
+            console.log(bill.id);
             return {
                 Index: {
                     siteInfo: {
@@ -719,6 +719,7 @@
                 ModalMark: false,
                 ModalMsg: "",
                 KeyShow: false,
+                id:bill.id,
                 timestamp: bill.timestamp,
                 price: bill.price,
                 cid:bill.cid,
