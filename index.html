@@ -220,6 +220,229 @@
                 },
                 month:themonth,
                 bills: [],
+                daylist:[],
+                payment: 0,
+                revenue: 0
+            }
+        },
+        asyncData: function(resolve, reject) {
+            
+            var self = this;
+            var userInfo = JSON.parse(localStorage.userInfo);
+
+            this.$http.get('/billlist/'+userInfo.bid+'/?month='+this.$data.month, function(data, status, request) {
+
+                var asynBill = [];
+                var daylist = [];
+                var bdays = [];
+                for(m=0;m<data.length;m++){
+                    asynBill.push({
+                        'id':data[m]._id,
+                        'cid':data[m].cid._id,
+                        'category': data[m].cid.name,
+                        'price': data[m].price,
+                        'user':data[m].uid.name,
+                        'mark': data[m].mark,
+                        'bday': data[m].bday,
+                        'timestamp': data[m].time,
+                        'type': data[m].type
+                    });
+                }
+                asynBill = asynBill.reverse();
+                localStorage.billList = JSON.stringify(asynBill);
+                var dailyIdTmp = 0;
+                var dailybdayTmp = '';
+                var dailyDate = new Date(); 
+                
+                for(i=0;i<asynBill.length;i++){
+                    if(asynBill[i].type == 'payment'){
+                        dailyDate = new Date(Date.parse(asynBill[i].bday.replace(/-/g, "/")));
+                        if(dailyIdTmp == 0 && dailybdayTmp==""){
+                            daylist.push({
+                                'price':asynBill[i].price,
+                                'bday':asynBill[i].bday,
+                                'num':1,
+                                'day':dailyDate.getDate()
+                            });
+                        }else if(asynBill[i].bday == dailybdayTmp){
+                            daylist[dailyIdTmp] = {
+                                'price':(parseFloat(asynBill[i].price) + parseFloat(daylist[dailyIdTmp].price)).toFixed(2),
+                                'bday':asynBill[i].bday,
+                                'num':(daylist[dailyIdTmp].num+1),
+                                'day':daylist[dailyIdTmp].day
+                            }
+                            
+                        }else if(asynBill[i].bday != dailybdayTmp){
+                            dailyPriceTmp = 0;
+                            dailyDate = new Date(Date.parse(asynBill[i].bday.replace(/-/g, "/"))); 
+                            daylist.push({
+                                'price':asynBill[i].price,
+                                'bday':asynBill[i].bday,
+                                'num':1,
+                                'day':dailyDate.getDate()
+                            });
+                        }
+                        
+                        dailybdayTmp = asynBill[i].bday;
+                    }
+                }
+                daylist.sort(function(x, y){
+                    return y.day - x.day;
+
+                });
+                resolve({
+                    daylist:daylist,
+                    bills:asynBill
+                })
+                this.$nextTick(function() {
+                    var clist = [];
+                    var cdata = [];
+                    for (j = 0; j < this.$data.bills.length; j++) {
+                        if (this.$data.bills[j].type == 'payment') {
+                            this.$data.payment += parseFloat(this.$data.bills[j].price);
+                            if (clist.indexOf(this.$data.bills[j].category) == -1) {
+                                clist.push(this.$data.bills[j].category);
+                                cdata.push({
+                                    'name': this.$data.bills[j].category,
+                                    'value': 0
+                                })
+                            }
+                        } else if (this.$data.bills[j].type == 'revenue') {
+                            this.$data.revenue += parseFloat(this.$data.bills[j].price);
+                        }
+                    }
+
+                    this.$data.payment = parseFloat(this.$data.payment).toFixed(2);
+                    this.$data.revenue = this.$data.revenue.toFixed(2);
+
+                    for (i = 0; i < this.$data.bills.length; i++) {
+                        for (n = 0; n < cdata.length; n++) {
+                            if (this.$data.bills[i].category == clist[n]) {
+                                cdata[n].value = cdata[n].value + parseFloat(this.$data.bills[i].price);
+                            }
+                        }
+
+                    }
+
+                    var myChart = require('echarts').init(document.getElementById('chart'));
+                    myChart.setOption({
+                        backgroundColor: '#5677fc',
+                        calculable: false,
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{b} : {c} ({d}%)"
+                        },
+                        calculable: true,
+                        series: [{
+                            type: 'pie',
+                            radius: ['50%', '70%'],
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: true
+                                    },
+                                    labelLine: {
+                                        show: true
+                                    }
+                                }
+                            },
+                            data: cdata
+                        }]
+                    });
+                });
+                
+
+            }).error(function(data, status, request) {
+
+            });
+            
+        },
+        methods: {
+            goBack: function(e) {
+                history.go(-1);
+            },
+            openAdd: function() {
+                this.$data.showAdd = !this.$data.showAdd;
+            },
+            close: function() {
+                this.$data.showModal = false;
+                this.$data.showAddModal = false;
+            }
+        },
+        template: '<header class="header mui-bar mui-bar-nav"><a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a><button class="mui-btn mui-btn-link mui-btn-nav mui-pull-right"><span></span></button><h1 id="title" class="mui-title">{{siteInfo.sitename}}</h1></header>' +
+            '<div class="modal-mask" v-if="showModal" v-transition="modal">' +
+            '<div class="modal-wrapper">' +
+            '<div class="modal-container" v-if="showAddModal">' +
+            '<button v-touch="tap:close" class="close-modal-btn">×</button>' +
+            '<content select=".modal-header">' +
+            '<div class="modal-header">' +
+            '添加' +
+            '</div>' +
+            '</content>' +
+            '<content select=".modal-body">' +
+            '<div class="modal-body">' +
+            '<input class="doned-input" v-model="itemname" autofocus="autofocus">' +
+            '<button class="doned-btn" v-on="click:add "> Done </button>' +
+            '</div>' +
+            '</content>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="mui-content chart-page">' +
+            '<div class="chart">' +
+            '<div class="chart-box">' +
+            '<div id="chart"></div>' +
+            '<div class="chart-txt">' +
+            '<div class="chart-txt-left"><span>收入 ￥{{revenue}}</span></div>' +
+            '<div class="chart-txt-left"><span>支出 ￥{{payment}}</span></div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="chart-list">' +
+            '<ul>' +
+            '<li  v-repeat="day in daylist">' +
+            '<div class="month-icon"><span>{{day.day}}</span></div>' +
+            '<div class="month-txt"><span v-link="daily/{{day.bday}}" class="bill-name">{{day.num}}}笔花费记账</span><span class="bill-price">￥{{day.price}}</span><br/></div>' +
+            '</li>' +
+            '</ul>' +
+            '</div>' +
+            '</div>' +
+            '<div v-if="showAdd" class="chart-add-box">' +
+            '<div class="chart-add-btn"  v-link="add/revenue">' +
+            '<span>收入</span>' +
+            '</div>' +
+            '<div class="chart-add-btn"  v-link="add/payment">' +
+            '<span>花费</span>' +
+            '</div>' +
+            '</div>' +
+            '<div class="add-box"  v-touch="tap:openAdd">' +
+            '<span>＋</span>' +
+            '</div>' +
+            '</div>'
+
+    })
+
+    var Monthly = Vue.extend({
+
+        data: function() {
+            if (!localStorage.userInfo) {
+                router.go('/login');
+            }
+            if(this.$route.params.month){
+                var themonth = this.$route.params.month;
+            }else{
+               var month = new Date; 
+               var themonth = month.getFullYear()+'-'+parseInt(month.getMonth()+1);
+            }
+            
+            return {
+                showModal: false,
+                showAddModal: false,
+                showAdd: false,
+                siteInfo: {
+                    sitename: themonth
+                },
+                month:themonth,
+                bills: [],
                 payment: 0,
                 revenue: 0
             }
@@ -412,6 +635,8 @@
             var cdata = [];
 
             for (j = 0; j < this.$data.bills.length; j++) {
+                console.log(this.$data.bills);
+                console.log(this.$data.bills[j]);
                 if (this.$data.bills[j].type == 'payment') {
                     this.$data.payment += parseFloat(this.$data.bills[j].price);
                     if (clist.indexOf(this.$data.bills[j].category) == -1) {
@@ -612,7 +837,7 @@
                         'price': this.$data.price,
                         'mark': this.$data.marked,
                         'bday': bday,
-                        'timestamp': timestamp,
+                        'time': bday,
                         'type': this.$data.type,
                         'uid': userInfo.uid,
                         'user': userInfo.username,
@@ -724,7 +949,6 @@
                 }
             }
             var thetime = new Date(bill.bday);
-            console.log(bill.id);
             return {
                 Index: {
                     siteInfo: {
@@ -798,14 +1022,26 @@
                 }
             },
             delBill: function() {
-                var billList = JSON.parse(localStorage.billList);
-                for (i = 0; i < billList.length; i++) {
-                    if (billList[i].timestamp == this.$route.params.timestamp) {
-                        billList.splice(i, 1);
-                    }
-                }
-                localStorage.billList = JSON.stringify(billList);
-                router.go('/chart');
+                // var billList = JSON.parse(localStorage.billList);
+                // for (i = 0; i < billList.length; i++) {
+                //     if (billList[i].id == this.$data.bill.id) {
+                //         billList.splice(i, 1);
+                //     }
+                // }
+                // localStorage.billList = JSON.stringify(billList);
+                this.$http.get('/del/bill/'+this.$data.id, function(data, status, request) {
+                        if (data.error) {
+                            alert('error');
+                        } else {
+                            alert('ok');
+                            router.go('/chart');
+                        }
+
+                    }).error(function(data, status, request) {
+                        alert('error');
+                    });
+
+                
             },
             doThis: function() {
                 if (this.$data.price == 0) {
@@ -828,9 +1064,9 @@
                         'type': this.$data.type
                     }, function(data, status, request) {
                         if (data.error) {
-                            console.log('error')
+                            alert('error');
                         } else {
-                            
+                            alert('ok');
                         }
 
                     }).error(function(data, status, request) {
@@ -947,8 +1183,11 @@
         '/chart': {
             component: Chart
         },
-        '/chart/:month': {
-            component: Chart
+        '/month': {
+            component: Monthly
+        },
+        '/month/:month': {
+            component: Monthly
         },
         '/add/:type': {
             component: Add

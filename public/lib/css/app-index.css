@@ -607,17 +607,38 @@
     color: #999999;
 }
 
-.submit-btn-box,.login-btn-box{
-    margin-top:1rem;
+.submit-btn-box,
+.login-btn-box {
+    margin-top: 1rem;
     text-align: center;
 }
+
 .login-btn-box div {
     width: 50%;
     float: left;
     text-align: center;
 }
 
-.submit-btn,.login-btn-box button {
+.submit-btn,
+.login-btn-box button {
     width: 80%;
     font-size: 1rem;
+}
+
+.month-icon {
+    background-color: #FF8383;
+    width: 4rem;
+    height: 6rem;
+    position: absolute;
+}
+
+.month-icon span {
+    font-size: 3rem;
+    color: #fff;
+    line-height: 6rem;
+}
+
+.month-txt {
+    font-size: 1.4rem;
+    line-height: 6rem;
 }
