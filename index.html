@@ -112,12 +112,16 @@
                 location.href = '#!/'
             },
             logined: function() {
+                if(this.$data.password==''||this.$data.username==''){
+                    alert('没用户名和密码怎么登录啊');
+                    return;
+                }
                 this.$http.post('/login', {
                     username: this.$data.username,
                     password: this.$data.password
                 }, function(data, status, request) {
                     if (data.error) {
-                        console.log('error')
+                        alert(data.msg);
                     } else {
                         localStorage.userInfo = JSON.stringify(data.data);
                         router.go('/chart');
@@ -200,13 +204,21 @@
             if (!localStorage.userInfo) {
                 router.go('/login');
             }
+            if(this.$route.params.month){
+                var themonth = this.$route.params.month;
+            }else{
+               var month = new Date; 
+               var themonth = month.getFullYear()+'-'+parseInt(month.getMonth()+1);
+            }
+            
             return {
                 showModal: false,
                 showAddModal: false,
                 showAdd: false,
                 siteInfo: {
-                    sitename: "Bookkeeper"
+                    sitename: themonth
                 },
+                month:themonth,
                 bills: [],
                 payment: 0,
                 revenue: 0
@@ -216,9 +228,8 @@
             
             var self = this;
             var userInfo = JSON.parse(localStorage.userInfo);
-            
 
-            this.$http.get('/billlist/'+userInfo.bid, function(data, status, request) {
+            this.$http.get('/billlist/'+userInfo.bid+'/?month='+this.$data.month, function(data, status, request) {
                 var asynBill = [];
                 
                 for(m=0;m<data.length;m++){
@@ -934,6 +945,9 @@
             component: Index
         },
         '/chart': {
+            component: Chart
+        },
+        '/chart/:month': {
             component: Chart
         },
         '/add/:type': {

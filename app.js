@@ -123,6 +123,13 @@ billListSchema.statics.findbyid = function(id, callback) {
     }).exec(callback);
 }
 
+billSchema.statics.findbymonth = function(data, callback) {
+    return this.model('bill').find({
+        bbid: data.bid,
+        bday: {$regex: data.month}
+    }).populate('uid cid bid').exec(callback);
+}
+
 billSchema.statics.findbybid = function(bbid, callback) {
     return this.model('bill').find({
         bbid: bbid
@@ -291,9 +298,15 @@ app.get('/get/category/:type', function(req, res) {
 //bill
 app.get('/billlist/:id', function(req, res) {
     var bid = req.params.id;
+    var month = req.query.month;
+    month = month.substr(0,7);
+    var data = {
+        bid:bid,
+        month:month
+    }
     db = mongoose.createConnection(dburi);
 
-    billModel.findbybid(bid, function(error, result) {
+    billModel.findbymonth(data, function(error, result) {
         if (error) {
             res.send(error);
         } else {
@@ -500,9 +513,10 @@ app.post('/login', function(req, res) {
             db.close();
             return res.send(error);
         } else {
-            if (result.length == 0) {
+            if (result == null) {
                 return res.send({
-                    error: true
+                    error: true,
+                    msg:"查无此人"
                 });
             }
             if (result.password == user.password) {
