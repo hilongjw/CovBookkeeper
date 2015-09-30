@@ -218,7 +218,7 @@
                 for(m=0;m<data.length;m++){
                     asynBill.push({
                         'id':data[m]._id,
-                        'cid':data[m].cid.id,
+                        'cid':data[m].cid._id,
                         'category': data[m].cid.name,
                         'price': data[m].price,
                         'user':data[m].uid.name,
@@ -666,7 +666,7 @@
             '<div class="add-price-box"><span class="add-price">￥{{price}}</span></div>' +
             '<div class="add-category">' +
             '<ul>' +
-            '<li class="category-item" v-repeat="c in categoryList" v-touch="tap:setCategory"><div><div cid="{{c.id}}">{{c.name}}</div></li>' +
+            '<li class="category-item" v-repeat="c in categoryList" v-touch="tap:setCategory"><div><div cid="{{c._id}}">{{c.name}}</div></li>' +
             '</ul>' +
             '</div>' +
             '<div class="add-time">' +
@@ -815,7 +815,6 @@
                         } else {
                             
                         }
-
 
                     }).error(function(data, status, request) {
 
