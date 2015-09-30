@@ -205,7 +205,6 @@
 .chart-box {
     height: 100%;
     width: 100%;
-    background-color: #5677fc;
     position: relative;
 }
 
@@ -220,7 +219,7 @@
     width: 50%;
     text-align: center;
     float: left;
-    color: #fff;
+    color: #87CEFA;
 }
 
 #chart {
@@ -329,6 +328,7 @@
 
 .chart-list {
     position: relative;
+    background-color: #fff;
 }
 
 .add-price-box {
@@ -626,7 +626,7 @@
 }
 
 .month-icon {
-    background-color: #FF8383;
+    background-color: #87CEFA;
     width: 4rem;
     height: 6rem;
     position: absolute;

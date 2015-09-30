@@ -239,6 +239,7 @@
                     asynBill.push({
                         'id':data[m]._id,
                         'cid':data[m].cid._id,
+                        'ccid':data[m].cid.id,
                         'category': data[m].cid.name,
                         'price': data[m].price,
                         'user':data[m].uid.name,
@@ -326,7 +327,7 @@
 
                     var myChart = require('echarts').init(document.getElementById('chart'));
                     myChart.setOption({
-                        backgroundColor: '#5677fc',
+                        backgroundColor: 'rgba(0,0,0,0)',
                         calculable: false,
                         tooltip: {
                             trigger: 'item',
@@ -401,7 +402,7 @@
             '<ul>' +
             '<li  v-repeat="day in daylist">' +
             '<div class="month-icon"><span>{{day.day}}</span></div>' +
-            '<div class="month-txt"><span v-link="daily/{{day.bday}}" class="bill-name">{{day.num}}}笔花费记账</span><span class="bill-price">￥{{day.price}}</span><br/></div>' +
+            '<div class="month-txt"><span v-link="daily/{{day.bday}}" class="bill-name">{{day.num}}}笔消费记账</span><span class="bill-price">￥{{day.price}}</span><br/></div>' +
             '</li>' +
             '</ul>' +
             '</div>' +
@@ -667,7 +668,7 @@
                     self.$nextTick(function() {
                         var myChart = require('echarts').init(document.getElementById('chart'));
                         myChart.setOption({
-                            backgroundColor: '#5677fc',
+                            backgroundColor: 'rgba(0,0,0,0)',
                             calculable: false,
                             tooltip: {
                                 trigger: 'item',
@@ -738,7 +739,7 @@
             '<div class="chart-list">' +
             '<ul>' +
             '<li  v-repeat="bill in bills">' +
-            '<div class="bill-icon bill-icon-{{bill.cid}}"></div>' +
+            '<div class="bill-icon bill-icon-{{bill.ccid}}"></div>' +
             '<div class="bill-txt"><span v-link="/change/{{bill.timestamp}}" class="bill-name">{{bill.category}}</span><span class="bill-price">￥{{bill.price}}</span><br/><span class="bill-mark">{{bill.mark}}</span></div>' +
             '<div class="bill-time"><span>龙佳文 记录于 <span><span>{{bill.bday}}</span></div>' +
             '</li>' +
