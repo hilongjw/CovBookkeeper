@@ -544,7 +544,7 @@ app.post('/signin', function(req, res) {
         if (error) {
             res.send(error);
         } else {
-            if (result.length != 0) {
+            if (result != null) {
                 //关闭数据库链接
                 db.close();
                 res.send({

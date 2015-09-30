@@ -168,15 +168,23 @@
                 location.href = '#!/'
             },
             reged: function() {
+                if(this.$data.password != this.$data.repassword){
+                    alert('两次输入密码不一致呢');
+                    return ;
+                }
                 this.$http.post('/signin', {
                     username: this.$data.username,
                     password: this.$data.password
                 }, function(data, status, request) {
-                    if (data.error) {
-                        console.log('error')
-                    } else {
+                    
+                    if(data.error){
+                        alert(data.msg);
+                    }else{
+                        alert('success');
                         router.go('/chart');
                     }
+                        
+                    
 
 
                 }).error(function(data, status, request) {
@@ -189,11 +197,9 @@
     var Chart = Vue.extend({
 
         data: function() {
-            // var billList = [];
-            // if (localStorage.billList) {
-            //     billList = JSON.parse(localStorage.billList);
-            //     billList.reverse();
-            // }
+            if (!localStorage.userInfo) {
+                router.go('/login');
+            }
             return {
                 showModal: false,
                 showAddModal: false,
