@@ -402,9 +402,9 @@
             '</div>' +
             '<div class="chart-list">' +
             '<ul>' +
-            '<li  v-repeat="day in daylist">' +
+            '<li  v-link="daily/{{day.bday}}" v-repeat="day in daylist">' +
             '<div class="month-icon"><span>{{day.day}}</span></div>' +
-            '<div class="month-txt"><span v-link="daily/{{day.bday}}" class="bill-name">{{day.num}}}笔消费记账</span><span class="bill-price">￥{{day.price}}</span><br/></div>' +
+            '<div class="month-txt"><span  class="bill-name">{{day.num}}}笔消费记账</span><span class="bill-price">￥{{day.price}}</span><br/></div>' +
             '</li>' +
             '</ul>' +
             '</div>' +
@@ -1070,28 +1070,13 @@
                             alert('error');
                         } else {
                             alert('ok');
+                            router.go('/chart');
                         }
 
                     }).error(function(data, status, request) {
 
                     });
 
-
-                    var billList = JSON.parse(localStorage.billList);
-                    for (i = 0; i < billList.length; i++) {
-                        if (billList[i].timestamp == this.$route.params.timestamp) {
-                            billList[i] = {
-                                'category': this.$data.category,
-                                'price': this.$data.price,
-                                'mark': this.$data.marked,
-                                'bday': bday,
-                                'timestamp': this.$data.timestamp,
-                                'type': this.$data.type
-                            }
-                        }
-                    }
-
-                    localStorage.billList = JSON.stringify(billList);
                     this.$data.ModalShow = true;
                     this.$data.ModalMsg = '已经帮你记好了~';
                 }
