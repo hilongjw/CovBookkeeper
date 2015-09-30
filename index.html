@@ -235,7 +235,9 @@
                 var asynBill = [];
                 var daylist = [];
                 var bdays = [];
+                var singleday = new Date();
                 for(m=0;m<data.length;m++){
+                    singleday = new Date(Date.parse(data[m].bday.replace(/-/g, "/")));
                     asynBill.push({
                         'id':data[m]._id,
                         'cid':data[m].cid._id,
@@ -245,52 +247,52 @@
                         'user':data[m].uid.name,
                         'mark': data[m].mark,
                         'bday': data[m].bday,
+                        'singleday':singleday.getDate(),
                         'timestamp': data[m].time,
                         'type': data[m].type
                     });
                 }
-                asynBill = asynBill.reverse();
-                localStorage.billList = JSON.stringify(asynBill);
+                
                 var dailyIdTmp = 0;
-                var dailybdayTmp = '';
+                var dayTmp = 0;
                 var dailyDate = new Date(); 
+                asynBill.sort(function(x, y){
+                    return y.singleday - x.singleday;
+                });
+                localStorage.billList = JSON.stringify(asynBill);
                 
                 for(i=0;i<asynBill.length;i++){
                     if(asynBill[i].type == 'payment'){
-                        dailyDate = new Date(Date.parse(asynBill[i].bday.replace(/-/g, "/")));
-                        if(dailyIdTmp == 0 && dailybdayTmp==""){
+                        if(dailyIdTmp == 0 && dayTmp==""){
                             daylist.push({
                                 'price':asynBill[i].price,
                                 'bday':asynBill[i].bday,
                                 'num':1,
-                                'day':dailyDate.getDate()
+                                'day':asynBill[i].singleday
                             });
-                        }else if(asynBill[i].bday == dailybdayTmp){
+                        }else if(asynBill[i].singleday == dayTmp){
                             daylist[dailyIdTmp] = {
                                 'price':(parseFloat(asynBill[i].price) + parseFloat(daylist[dailyIdTmp].price)).toFixed(2),
                                 'bday':asynBill[i].bday,
                                 'num':(daylist[dailyIdTmp].num+1),
-                                'day':daylist[dailyIdTmp].day
+                                'day':dayTmp
                             }
+                            console.log("equal:"+asynBill[i].singleday+" "+dayTmp)
                             
-                        }else if(asynBill[i].bday != dailybdayTmp){
+                        }else if(asynBill[i].singleday != dayTmp){
+                            
                             dailyPriceTmp = 0;
-                            dailyDate = new Date(Date.parse(asynBill[i].bday.replace(/-/g, "/"))); 
                             daylist.push({
                                 'price':asynBill[i].price,
                                 'bday':asynBill[i].bday,
                                 'num':1,
-                                'day':dailyDate.getDate()
+                                'day':asynBill[i].singleday
                             });
+                            dailyIdTmp++;
                         }
-                        
-                        dailybdayTmp = asynBill[i].bday;
+                        dayTmp = asynBill[i].singleday;
                     }
                 }
-                daylist.sort(function(x, y){
-                    return y.day - x.day;
-
-                });
                 resolve({
                     daylist:daylist,
                     bills:asynBill
@@ -741,7 +743,7 @@
             '<li  v-repeat="bill in bills">' +
             '<div class="bill-icon bill-icon-{{bill.ccid}}"></div>' +
             '<div class="bill-txt"><span v-link="/change/{{bill.timestamp}}" class="bill-name">{{bill.category}}</span><span class="bill-price">￥{{bill.price}}</span><br/><span class="bill-mark">{{bill.mark}}</span></div>' +
-            '<div class="bill-time"><span>龙佳文 记录于 <span><span>{{bill.bday}}</span></div>' +
+            '<div class="bill-time"><span>{{bill.user}} 记录于 <span><span>{{bill.bday}}</span></div>' +
             '</li>' +
             '</ul>' +
             '</div>' +

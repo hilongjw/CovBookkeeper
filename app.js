@@ -399,7 +399,6 @@ app.post('/add/bill', function(req, res) {
     db.on('error', function(error) {
         console.log(error + " wtf");
     });
-    var billDate = new Date(Date.parse(post.time.replace(/-/g, "/")));
     var bill = {
         uid: post.uid,
         cid: post.cid,
@@ -408,7 +407,6 @@ app.post('/add/bill', function(req, res) {
         bbid: post.bid,
         bid: post.bid,
         mark: post.mark,
-        time:billDate,
         type: post.type
     };
     //for (j = 0; j < covsession.length; j++) {
