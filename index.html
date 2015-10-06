@@ -124,6 +124,9 @@
                     '<li v-link="changebilllist" class="mui-table-view-cell">'+
                         '<a class="mui-navigate-right">账单 {{billList.name}}</a>'+
                     '</li>'+
+                    '<li v-link="addbilllist" class="mui-table-view-cell">'+
+                        '<a class="mui-navigate-right">添加账单</a>'+
+                    '</li>'+
                 '</ul>'+
                 '<ul class="mui-table-view">'+
                     '<li class="mui-table-view-cell" style="text-align: center;">'+
@@ -193,16 +196,71 @@
             '<a v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
             '</header>' +
             '<div class="mui-page-content billlist-page">'+
+                '<p>账本ID：{{billList._id}}</p>'+
                 '<input type="text" v-model="billList.name">'+
+            '</div>'
+
+    })
+
+    var addBillList = Vue.extend({
+
+        data: function() {
+            
+            if(localStorage.userInfo){
+                userInfo = JSON.parse(localStorage.userInfo);
+                return {
+                    userInfo: userInfo,
+                    bid:userInfo.bid
+                }
+            }
+            
+        },
+        methods: {
+            goBack: function(e) {
+                history.go(-1);
+            },
+            logout: function(){
+                localStorage.clear();
+                router.go('/');
+            },
+            saveChange: function(){
+                this.$http.post('/change/userbilllist',{
+                    id: this.$data.userInfo.uid,
+                    bid: this.$data.bid
+                }, function(data, status, request) {
+                    if(data.error){
+                        alert('opps');
+                    }else{
+                        var user = JSON.parse(localStorage.userInfo);
+                        user.bid = this.$data.bid;
+                        localStorage.userInfo = JSON.stringify(user);
+                       router.go('user');
+                    }
+                
+                }).error(function(data, status, request) {
+
+                });
+            }
+        },
+        template: '<header class="header mui-bar mui-bar-nav"><h1 id="title" class="mui-title">{{userInfo.username}}</h1>'+
+            '<a  v-on="click: saveChange" class="mui-icon mui-icon-checkmarkempty mui-pull-right"></a>' +
+            '<a v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
+            '</header>' +
+            '<div class="mui-page-content billlist-page">'+
+                '<p>账本ID:</p>'+
+                '<input type="text" v-model="bid">'+
             '</div>'
 
     })
 
     var Login = Vue.extend({
         ready: function() {
-
+            if(localStorage.userInfo){
+                router.go('/user');
+            }
         },
         data: function() {
+
             return {
                 username: "",
                 password: ""
@@ -1324,6 +1382,9 @@
         },
         '/changebilllist':{
             component: ChangeBillList
+        },
+        '/addbilllist':{
+            component: addBillList
         }
     })
 

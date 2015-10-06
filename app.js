@@ -512,7 +512,40 @@ app.post('/change/billlist', function(req, res) {
     });
 })
 
+//user
 
+app.post('/change/userbilllist',function(req, res) {
+    var post = req.body;
+
+    db = mongoose.createConnection(dburi);
+
+    var user = {
+        _id: post.id
+    };
+    var update = {
+        $set: {
+            bid: post.bid
+        }
+    };
+    var options = {
+        upsert: true
+    };
+    userModel.update(user , update, options, function(error,result) {
+        if (error) {
+            res.send({
+                error:true,
+                data:error
+            });
+        } else {
+            res.send({
+                error:false,
+                data:result
+            });
+        }
+        db.close();
+    });
+
+});
 
 
 app.post('/login', function(req, res) {

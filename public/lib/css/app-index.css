@@ -236,7 +236,7 @@
 
 .chart-list ul li {
     position: relative;
-    height: 6rem;
+    height: 4rem;
     width: 100%;
     margin: 0 0 1rem 0;
     background-color: #fff;
@@ -246,7 +246,7 @@
 .bill-icon {
     background-color: #FF8383;
     width: 4rem;
-    height: 6rem;
+    height: 4rem;
     position: absolute;
 }
 
@@ -327,6 +327,7 @@
 }
 
 .chart-list {
+    min-height: 60vh;
     position: relative;
     background-color: #fff;
 }
@@ -628,19 +629,19 @@
 .month-icon {
     background-color: #87CEFA;
     width: 4rem;
-    height: 6rem;
+    height: 4rem;
     position: absolute;
 }
 
 .month-icon span {
     font-size: 3rem;
     color: #fff;
-    line-height: 6rem;
+    line-height: 4rem;
 }
 
 .month-txt {
     font-size: 1.4rem;
-    line-height: 6rem;
+    line-height: 4rem;
 }
 .billlist-page,.user-page{
     margin-top: 60px; 
