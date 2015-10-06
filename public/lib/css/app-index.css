@@ -642,3 +642,12 @@
     font-size: 1.4rem;
     line-height: 6rem;
 }
+.billlist-page,.user-page{
+    margin-top: 60px; 
+}
+.user-page .mui-table-view:first-child {
+    margin-top: 60px;
+}
+.user-page .mui-table-view:first-child {
+    margin-top: 30px;
+}

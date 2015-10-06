@@ -70,6 +70,133 @@
             '</div>'
 
     })
+    
+    var User = Vue.extend({
+
+        data: function() {
+            
+            if(localStorage.userInfo){
+                userInfo = JSON.parse(localStorage.userInfo);
+                return {
+                    userInfo: userInfo,
+                    billList:{
+                        name:""
+                    }
+                }
+            }else{
+                router.go('');
+                return{
+                    userInfo:{
+                        username:""
+                    }
+                }
+            }
+            
+        },
+        asyncData: function(resolve, reject) {
+            this.$http.get('/get/billlist/' + this.$data.userInfo.bid, function(data, status, request) {
+                if(data.error){
+                    alert('opps');
+                }else{
+                    resolve({
+                        billList: data.data
+                    })
+                }
+                
+            }).error(function(data, status, request) {
+
+            });
+        },
+        methods: {
+            goBack: function(e) {
+                router.go('/chart');
+            },
+            logout: function(){
+                localStorage.clear();
+                router.go('/');
+            }
+        },
+        template: '<header class="header mui-bar mui-bar-nav"><h1 id="title" class="mui-title">{{userInfo.username}}</h1>'+
+            '<a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
+            '</header>' +
+            '<div class="mui-page-content user-page">'+
+                '<ul class="mui-table-view mui-table-view-chevron">'+
+                    '<li v-link="changebilllist" class="mui-table-view-cell">'+
+                        '<a class="mui-navigate-right">账单 {{billList.name}}</a>'+
+                    '</li>'+
+                '</ul>'+
+                '<ul class="mui-table-view">'+
+                    '<li class="mui-table-view-cell" style="text-align: center;">'+
+                        '<a v-touch="tap:logout">退出</a>'+
+                    '</li>'+
+                '</ul>'+
+            '</div>'
+
+    })
+    
+    var ChangeBillList = Vue.extend({
+
+        data: function() {
+            
+            if(localStorage.userInfo){
+                userInfo = JSON.parse(localStorage.userInfo);
+                return {
+                    userInfo: userInfo,
+                    billList:{
+                        name:""
+                    }
+                }
+            }
+            
+        },
+        asyncData: function(resolve, reject) {
+            console.log(this.$data.userInfo);
+            this.$http.get('/get/billlist/' + this.$data.userInfo.bid, function(data, status, request) {
+                if(data.error){
+                    alert('opps');
+                }else{
+                    resolve({
+                        billList: data.data
+                    })
+                }
+                
+            }).error(function(data, status, request) {
+
+            });
+        },
+        methods: {
+            goBack: function(e) {
+                history.go(-1);
+            },
+            logout: function(){
+                localStorage.clear();
+                router.go('/');
+            },
+            saveChange: function(){
+                this.$http.post('/change/billlist',{
+                    id: this.$data.userInfo.bid,
+                    name: this.$data.billList.name
+                }, function(data, status, request) {
+                    if(data.error){
+                        alert('opps');
+                    }else{
+                       router.go('user');
+                    }
+                
+                }).error(function(data, status, request) {
+
+                });
+            }
+        },
+        template: '<header class="header mui-bar mui-bar-nav"><h1 id="title" class="mui-title">{{userInfo.username}}</h1>'+
+            '<a  v-on="click: saveChange" class="mui-icon mui-icon-checkmarkempty mui-pull-right"></a>' +
+            '<a v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
+            '</header>' +
+            '<div class="mui-page-content billlist-page">'+
+                '<input type="text" v-model="billList.name">'+
+            '</div>'
+
+    })
 
     var Login = Vue.extend({
         ready: function() {
@@ -230,7 +357,7 @@
             var self = this;
             var userInfo = JSON.parse(localStorage.userInfo);
 
-            this.$http.get('/billlist/'+userInfo.bid+'/?month='+this.$data.month, function(data, status, request) {
+            this.$http.get('/billmonth/'+userInfo.bid+'/?month='+this.$data.month, function(data, status, request) {
 
                 var asynBill = [];
                 var daylist = [];
@@ -372,7 +499,7 @@
                 this.$data.showAddModal = false;
             }
         },
-        template: '<header class="header mui-bar mui-bar-nav"><a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a><button class="mui-btn mui-btn-link mui-btn-nav mui-pull-right"><span></span></button><h1 id="title" class="mui-title">{{siteInfo.sitename}}</h1></header>' +
+        template: '<header class="header mui-bar mui-bar-nav"><a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a><button class="mui-btn mui-btn-link mui-btn-nav mui-pull-right"><span></span></button><button v-link="/user" class="mui-btn mui-btn-link mui-btn-nav mui-pull-right"><span class="mui-icon mui-icon-person"></span></button><h1 id="title" class="mui-title">{{siteInfo.sitename}}</h1></header>' +
             '<div class="modal-mask" v-if="showModal" v-transition="modal">' +
             '<div class="modal-wrapper">' +
             '<div class="modal-container" v-if="showAddModal">' +
@@ -1191,6 +1318,12 @@
         },
         'submit': {
             component: Reg
+        },
+        '/user':{
+            component: User
+        },
+        '/changebilllist':{
+            component: ChangeBillList
         }
     })
 

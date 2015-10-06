@@ -75,7 +75,7 @@ var userSchema = new mongoose.Schema({
 var billListSchema = new mongoose.Schema({
     name: {
         type: String
-    },
+    },    
     time: {
         type: Date,
         default: Date.now
@@ -99,11 +99,14 @@ var categorySchema = new mongoose.Schema({
 
 
 billListSchema.statics.findbyid = function(id, callback) {
-    return this.model('billList').find({
+    return this.model('billList').findOne({
         _id: id
     }, callback);
 }
 
+billListSchema.statics.findAll = function(id, callback) {
+    return this.model('billList').find({}, callback);
+}
 
 userSchema.statics.findbyusername = function(username, callback) {
     return this.model('user').findOne({
@@ -115,12 +118,6 @@ billSchema.statics.findbyid = function(id, callback) {
     return this.model('bill').findOne({
         _id: id
     }, callback);
-}
-
-billListSchema.statics.findbyid = function(id, callback) {
-    return this.model('bill').findOne({
-        _id: id
-    }).exec(callback);
 }
 
 billSchema.statics.findbymonth = function(data, callback) {
@@ -296,7 +293,7 @@ app.get('/get/category/:type', function(req, res) {
 
 
 //bill
-app.get('/billlist/:id', function(req, res) {
+app.get('/billmonth/:id', function(req, res) {
     var bid = req.params.id;
     var month = req.query.month;
     month = month.substr(0,7);
@@ -415,7 +412,6 @@ app.post('/add/bill', function(req, res) {
         if (error) {
             res.send(error);
         } else {
-            console.log(result);
             res.send(result);
         }
 
@@ -439,66 +435,84 @@ app.get('/bill/:id', function(req, res) {
     });
 });
 
-app.post('/change', function(req, res) {
+
+//blist
+app.get('/get/billlist', function(req, res) {
+    db = mongoose.createConnection(dburi);
+    // 基于静态方法的查询
+    billListModel.findAll(req.params.id, function(error, result) {
+        if (error) {
+            res.send({
+                error:true,
+                msg:error
+            });
+        } else {
+            res.send({
+                error:false,
+                data:result
+            });
+        }
+        //关闭数据库链接
+        db.close();
+    });
+});
+
+app.get('/get/billlist/:id', function(req, res) {
+    db = mongoose.createConnection(dburi);
+    // 基于静态方法的查询
+    billListModel.findbyid(req.params.id, function(error, result) {
+        if (error) {
+            res.send({
+                error:true,
+                msg:error
+            });
+        } else {
+            res.send({
+                error:false,
+                data:result
+            });
+        }
+        //关闭数据库链接
+        db.close();
+    });
+});
+
+app.post('/change/billlist', function(req, res) {
+
     var post = req.body;
-    post.text = xss(post.text);
+
     db = mongoose.createConnection(dburi);
 
-
-    var conditions = {
+    var billList = {
         _id: post.id
     };
     var update = {
         $set: {
-            title: post.title,
-            content: post.content
+            name: post.name
         }
     };
     var options = {
         upsert: true
     };
-    for (j = 0; j < covsession.length; j++) {
-        if (covsession[j].username == post.author && covsession[j].sid == post.token) {
-
-            postModel.findbyid(post.id, function(error, result) {
-                if (error) {
-                    res.send(error);
-                } else {
-                    if (result[0].author != post.author) {
-                        return res.send({
-                            error: true,
-                            msg: "不要玩我！"
-                        });
-                    }
-                }
-                db.close();
+    billListModel.update(billList , update, options, function(error,result) {
+        if (error) {
+            res.send({
+                error:true,
+                data:error
             });
-
-            postModel.update(conditions, update, options, function(error) {
-
-                db.close();
-                if (error) {
-                    return res.send({
-                        error: true,
-                        msg: error
-                    });
-                } else {
-                    return res.send({
-                        error: false
-                    });
-                }
-
-            });
-
-        } else if (j == covsession.length) {
-            return res.send({
-                error: true,
-                msg: "不要玩我！"
+        } else {
+            res.send({
+                error:false,
+                post:post,
+                data:result
             });
         }
-    }
+        //关闭数据库链接
+        db.close();
+    });
+})
 
-});
+
 
 
 app.post('/login', function(req, res) {
