@@ -203,7 +203,9 @@
     })
 
     var addBillList = Vue.extend({
-
+        ready:function(){
+            window.scrollTo(0, 0);
+        },
         data: function() {
             
             if(localStorage.userInfo){
