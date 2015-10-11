@@ -33,6 +33,9 @@
         var time = new Date(str);
         return time.getFullYear() + "/" + (time.getMonth() + 1) + '/' + time.getDate();
     })
+    Vue.filter('iconWord', function(str) {
+        return str.substr(0,1)
+    })
 
     // 作为入口
     require(
@@ -591,7 +594,6 @@
         template: 
         '<header class="header mui-bar mui-bar-nav">'+
             '<button class="pull-left" v-touch="tap: showuser"><span>≡</span></button>'+
-            '<button v-link="/user" class="mui-btn mui-btn-link mui-btn-nav mui-pull-right"><span class="mui-icon mui-icon-person"></span></button>'+
             '<h1 class="mui-title">{{siteInfo.sitename}}的账单</h1>'+
         '</header>'+
         '<div class="index-user" v-if="showUser" v-transition="index-user">'+
@@ -979,7 +981,7 @@
             '<div class="chart-list">' +
             '<ul>' +
             '<li  v-repeat="bill in bills">' +
-            '<div class="bill-icon bill-icon-{{bill.ccid}}"></div>' +
+            '<div class="bill-icon bill-icon-{{bill.ccid}}">{{bill.category | iconWord}}</div>' +
             '<div class="bill-txt"><span v-link="/change/{{bill.timestamp}}" class="bill-name">{{bill.category}}</span><span class="bill-price">￥{{bill.price}}</span><br/><span class="bill-mark">{{bill.mark}}</span></div>' +
             '<div class="bill-time"><span>{{bill.user}} 记录于 <span><span>{{bill.bday}}</span></div>' +
             '</li>' +

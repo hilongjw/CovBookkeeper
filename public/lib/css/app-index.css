@@ -249,6 +249,9 @@
     height: 4rem;
     position: absolute;
     border-radius: 0.5rem;
+    font-size: 2rem;
+    line-height: 4rem;
+    color: #fff;
 }
 
 .bill-icon-1 {
@@ -644,7 +647,7 @@
     font-size: 3rem;
     color: #fff;
     line-height: 4rem;
-    text-shadow: 1px 2px #87CEFA,2px 4px #aee2d9;
+    text-shadow: 1px 2px #87CEFA, 2px 4px #aee2d9;
 }
 
 .month-txt {
@@ -699,8 +702,8 @@
 
 .index-user-enter,
 .index-user-leave {
-    transform:translate(-70%,0);
-    -webkit-transform:translate(-70%,0);
+    transform: translate(-70%, 0);
+    -webkit-transform: translate(-70%, 0);
     opacity: 0;
 }
 
