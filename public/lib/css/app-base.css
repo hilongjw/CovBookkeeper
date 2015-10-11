@@ -1,30 +1,74 @@
 .header {
-	background-color: #3AB4FF;
-	box-shadow: none;
+    background-color: #3AB4FF;
+    box-shadow: none;
+    height: 4rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
 }
+
+.mui-content {
+    margin-top: 4rem;
+}
+
 .header span,
 .header h1,
 .header>a,
 .header>button {
-	color: #fff!important;
+    color: #fff!important;
+    margin: 0;
 }
-.header .smaller button,.header .smaller span{
-	font-size: 0.8rem!important;
+
+.header > h1 {
+    float: left;
+    line-height: 4rem;
+    font-size: 1.2rem;
+    margin: 0 1rem;
+}
+
+.header > .pull-left {
+    float: left;
+}
+
+.header > button {
+    line-height: 2rem;
+    height: 2rem;
+    margin-top: 1rem;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    
+}
+
+.header > button > span {
+    font-size: 2rem;
+}
+
+.header .smaller button,
+.header .smaller span {
+    font-size: 0.8rem!important;
 }
 
 .nav-btn {
-	padding: 6px 6px!important;
+    padding: 6px 6px!important;
 }
+
 .din-icon-set {
-	background-image: url(../img/set.png);
-	background-size: 100% 100%;
-	width: 26px;
-	height: 26px;
+    background-image: url(../img/set.png);
+    background-size: 100% 100%;
+    width: 26px;
+    height: 26px;
 }
+
 .grey {
-	color: #ACACB4;
+    color: #ACACB4;
 }
-html,body,#app{
+
+html,
+body,
+#app {
     height: 100%;
     width: 100%;
+    padding: 0px;
+    margin: 0px;
 }

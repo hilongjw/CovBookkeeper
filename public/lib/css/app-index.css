@@ -427,15 +427,16 @@
     line-height: 5rem;
 }
 
-.category-item > div >div {
+.category-item >div {
     margin: auto;
     width: 3rem;
     height: 3rem;
     background-color: #B3B3B3;
-    padding: 1rem 0.5rem;
-    border-radius: 0.5rem;
+    padding: .5rem;
+    border-radius: .5rem;
     color: #fff;
     font-size: 1rem;
+    line-height: 3rem;
 }
 
 .category-item .category-on {
@@ -643,12 +644,67 @@
     font-size: 1.4rem;
     line-height: 4rem;
 }
-.billlist-page,.user-page{
-    margin-top: 60px; 
+
+.billlist-page,
+.user-page {
+    margin-top: 60px;
 }
+
 .user-page .mui-table-view:first-child {
     margin-top: 60px;
 }
+
 .user-page .mui-table-view:first-child {
     margin-top: 30px;
+}
+
+.index-user {
+    position: fixed;
+    width: 70%;
+    height: 100%;
+    top: 4rem;
+    background-color: #fff;
+    z-index: 99;
+}
+
+.index-user-transition {
+    transition: all .3s;
+}
+
+.index-user-tbox-avabox {
+    height: 5rem;
+    padding: 1rem;
+}
+
+.index-user-tbox-name {
+    padding: 0 1rem;
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+.index-user-tbox-ava {
+    background-color: #fff;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+}
+
+.index-user-tbox {
+    width: 100%;
+    height: 10rem;
+    background-color: #A7DDFF;
+}
+
+.index-user-enter,
+.index-user-leave {
+    width: 70%;
+    opacity: 0;
+}
+
+.index-user-tlist-item {
+    font-size: 1rem;
+    width: 100%;
+    height: 3rem;
+    line-height: 3rem;
+    padding-left: 2rem;
 }
