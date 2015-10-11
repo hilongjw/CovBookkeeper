@@ -249,11 +249,13 @@
                 });
             }
         },
-        template: '<header class="header mui-bar mui-bar-nav"><h1 id="title" class="mui-title">{{userInfo.username}}</h1>'+
+        template: '<header class="header mui-bar mui-bar-nav">'+
+            '<button class="pull-left" v-touch="tap: goBack"><span>＜</span></button>'+
+            '<h1 id="title" class="mui-title">{{userInfo.username}}</h1>'+
             '<a  v-on="click: saveChange" class="mui-icon mui-icon-checkmarkempty mui-pull-right"></a>' +
             '<a v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
             '</header>' +
-            '<div class="mui-page-content billlist-page">'+
+            '<div class="mui-content billlist-page">'+
                 '<p>账本ID:</p>'+
                 '<input type="text" v-model="bid">'+
             '</div>'
@@ -590,7 +592,7 @@
         '<header class="header mui-bar mui-bar-nav">'+
             '<button class="pull-left" v-touch="tap: showuser"><span>≡</span></button>'+
             '<button v-link="/user" class="mui-btn mui-btn-link mui-btn-nav mui-pull-right"><span class="mui-icon mui-icon-person"></span></button>'+
-            '<h1 id="title" class="mui-title">{{siteInfo.sitename}}</h1>'+
+            '<h1 class="mui-title">{{siteInfo.sitename}}的账单</h1>'+
         '</header>'+
         '<div class="index-user" v-if="showUser" v-transition="index-user">'+
             '<div class="index-user-tbox">'+
@@ -640,7 +642,7 @@
             '<ul>' +
             '<li  v-link="daily/{{day.bday}}" v-repeat="day in daylist">' +
             '<div class="month-icon"><span>{{day.day}}</span></div>' +
-            '<div class="month-txt"><span class="bill-name">{{day.num}}}笔消费记账</span><span class="bill-price">￥{{day.price}}</span><br/></div>' +
+            '<div class="month-txt"><span class="bill-name">{{day.num}}}笔消费记账</span><span class="bill-price">￥{{day.price}}</span></div>' +
             '</li>' +
             '</ul>' +
             '</div>' +

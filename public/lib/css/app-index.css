@@ -238,9 +238,9 @@
     position: relative;
     height: 4rem;
     width: 100%;
-    margin: 0 0 1rem 0;
+    padding: 0.5rem 0;
     background-color: #fff;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.26);
+    border-bottom: 1px solid #EAEAEA;
 }
 
 .bill-icon {
@@ -248,6 +248,7 @@
     width: 4rem;
     height: 4rem;
     position: absolute;
+    border-radius: 0.5rem;
 }
 
 .bill-icon-1 {
@@ -311,6 +312,7 @@
     position: absolute;
     color: #FF7F50;
     right: 1rem;
+    top: 0rem;
 }
 
 .bill-time {
@@ -410,7 +412,7 @@
 }
 
 .add-input-num li {
-    width: 33.3333333%;
+    width: 32.9%;
     height: 25%;
     border-top: 1px solid #D6D6D6;
     text-align: center;
@@ -456,7 +458,7 @@
 }
 
 .add-time-btn {
-    width: 6rem;
+    width: 7rem;
     height: 2rem;
     position: relative;
 }
@@ -469,6 +471,7 @@
     border: 1px solid #BBB;
     position: absolute;
     color: #7D7D7D;
+    width: 6rem;
 }
 
 .add-time-btn input {
@@ -476,6 +479,8 @@
     top: 0px;
     left: 0px;
     opacity: 0;
+    width: 5rem;
+    height: 2rem;
 }
 
 .add-mark-box {}
@@ -632,22 +637,19 @@
     width: 4rem;
     height: 4rem;
     position: absolute;
+    border-radius: 0.5rem;
 }
 
 .month-icon span {
     font-size: 3rem;
     color: #fff;
     line-height: 4rem;
+    text-shadow: 1px 2px #87CEFA,2px 4px #aee2d9;
 }
 
 .month-txt {
-    font-size: 1.4rem;
-    line-height: 4rem;
-}
-
-.billlist-page,
-.user-page {
-    margin-top: 60px;
+    font-size: 1.2rem;
+    line-height: 5rem;
 }
 
 .user-page .mui-table-view:first-child {
@@ -697,7 +699,8 @@
 
 .index-user-enter,
 .index-user-leave {
-    width: 70%;
+    transform:translate(-70%,0);
+    -webkit-transform:translate(-70%,0);
     opacity: 0;
 }
 
