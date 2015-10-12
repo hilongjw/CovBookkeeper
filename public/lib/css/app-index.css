@@ -579,10 +579,15 @@
 
 .mui-input-row {
     border-bottom: 1px;
+    text-align: center;
+    margin: 1rem 0;
 }
 
 .mui-input-row input {
     font-size: 1.2rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 80%;
 }
 
 .login-page .mui-input-group {
@@ -610,6 +615,7 @@
 .login-page {
     background-color: #fff;
     height: 100%;
+    margin: 5rem 0;
 }
 
 .login-page .link-area a,

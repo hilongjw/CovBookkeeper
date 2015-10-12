@@ -119,7 +119,10 @@
                 router.go('/');
             }
         },
-        template: '<header class="header mui-bar mui-bar-nav"><h1 id="title" class="mui-title">{{userInfo.username}}</h1>'+
+        template: 
+        '<header class="header mui-bar mui-bar-nav">'+
+            '<button class="pull-left" v-touch="tap: goBack"><span>＜</span></button>'+
+            '<h1 id="title" class="mui-title">用户设置</h1>'+
             '<a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
             '</header>' +
             '<div class="mui-content user-page">'+
@@ -158,7 +161,6 @@
             
         },
         asyncData: function(resolve, reject) {
-            console.log(this.$data.userInfo);
             this.$http.get('/get/billlist/' + this.$data.userInfo.bid, function(data, status, request) {
                 if(data.error){
                     alert('opps');
@@ -188,7 +190,7 @@
                     if(data.error){
                         alert('opps');
                     }else{
-                       router.go('user');
+                       router.go('chart');
                     }
                 
                 }).error(function(data, status, request) {
@@ -199,9 +201,8 @@
         template: 
         '<header class="header mui-bar mui-bar-nav">'+
             '<button class="pull-left" v-touch="tap: goBack"><span>＜</span></button>'+
+            '<button class="pull-right" v-touch="tap: saveChange"><span>√</span></button>'+
             '<h1 id="title" class="mui-title">{{userInfo.username}}</h1>'+
-            '<a  v-on="click: saveChange" class="mui-icon mui-icon-checkmarkempty mui-pull-right"></a>' +
-            '<a v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
         '</header>' +
         '<div class="mui-content billlist-page">'+
             '<p>账本ID：{{billList._id}}</p>'+
@@ -244,7 +245,7 @@
                         var user = JSON.parse(localStorage.userInfo);
                         user.bid = this.$data.bid;
                         localStorage.userInfo = JSON.stringify(user);
-                       router.go('user');
+                       router.go('chart');
                     }
                 
                 }).error(function(data, status, request) {
@@ -254,9 +255,8 @@
         },
         template: '<header class="header mui-bar mui-bar-nav">'+
             '<button class="pull-left" v-touch="tap: goBack"><span>＜</span></button>'+
-            '<h1 id="title" class="mui-title">{{userInfo.username}}</h1>'+
-            '<a  v-on="click: saveChange" class="mui-icon mui-icon-checkmarkempty mui-pull-right"></a>' +
-            '<a v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
+            '<button class="pull-right" v-touch="tap: saveChange"><span>√</span></button>'+
+            '<h1 id="title" class="mui-title">添加账单</h1>'+
             '</header>' +
             '<div class="mui-content billlist-page">'+
                 '<p>账本ID:</p>'+
@@ -279,8 +279,8 @@
             }
         },
         template: '<header class="header mui-bar mui-bar-nav hidden-header">' +
-            '<a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
-            '<h1 class="mui-title"></h1>' +
+            '<button class="pull-left" v-touch="tap: goBack"><span>＜</span></button>'+
+            '<h1 class="mui-title">登录</h1>' +
             '</header>' +
             '<div class=" mui-content login-page">' +
             '<form id="login-form" class="mui-input-group">' +
@@ -341,21 +341,18 @@
             }
         },
         template: '<header class="header mui-bar mui-bar-nav service-header">' +
-            '<a  v-on="click: goBack" class="mui-icon mui-icon-left-nav mui-pull-left"></a>' +
-            '<h1 class="mui-title"></h1>' +
+            '<button class="pull-left" v-touch="tap: goBack"><span>＜</span></button>'+
+            '<h1 class="mui-title">注册</h1>' +
             '</header>' +
             '<div class=" mui-content login-page">' +
             '<form class="mui-input-group">' +
             '<div class="mui-input-row">' +
-            '<label>账号</label>' +
             '<input type="text" class="mui-input-clear mui-input" placeholder="请输入账号" v-model="username">' +
             '</div>' +
             '<div class="mui-input-row">' +
-            '<label>密码</label>' +
             '<input type="password" class="mui-input-clear mui-input" placeholder="请输入密码" v-model="password">' +
             '</div>' +
             '<div class="mui-input-row">' +
-            '<label>确认</label>' +
             '<input type="password" class="mui-input-clear mui-input" placeholder="请确认密码" v-model="repassword">' +
             '</div>' +
             '</form>' +
@@ -489,7 +486,6 @@
                                 'num':(daylist[dailyIdTmp].num+1),
                                 'day':dayTmp
                             }
-                            console.log("equal:"+asynBill[i].singleday+" "+dayTmp)
                             
                         }else if(asynBill[i].singleday != dayTmp){
                             
@@ -599,9 +595,12 @@
         '<div class="index-user" v-if="showUser" v-transition="index-user">'+
             '<div class="index-user-tbox">'+
             '<div class="index-user-tbox-avabox"><div class="index-user-tbox-ava"></div></div>'+
-            '<div class="index-user-tbox-name"><span>龙翊</span></div>'+
+            '<div class="index-user-tbox-name"><span>{{bills[0].user}}</span></div>'+
             '</div>'+
             '<div class="index-user-tlist">'+
+                '<div v-link="user" class="index-user-tlist-item">'+
+                    '<span>用户设置</span>'+
+                '</div>'+
                 '<div v-link="changebilllist" class="index-user-tlist-item">'+
                     '<span>账本:{{billList.name}}</span>'+
                 '</div>'+
@@ -878,8 +877,6 @@
             var cdata = [];
 
             for (j = 0; j < this.$data.bills.length; j++) {
-                console.log(this.$data.bills);
-                console.log(this.$data.bills[j]);
                 if (this.$data.bills[j].type == 'payment') {
                     this.$data.payment += parseFloat(this.$data.bills[j].price);
                     if (clist.indexOf(this.$data.bills[j].category) == -1) {
@@ -1087,7 +1084,7 @@
                         'bid': userInfo.bid
                     };
                     this.$http.post('/add/bill',newbill, function(data, status, request) {
-                        console.log('ok');
+
                     }).error(function(data, status, request) {
 
                     });

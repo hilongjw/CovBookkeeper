@@ -30,6 +30,10 @@
 .header > .pull-left {
     float: left;
 }
+.header > .pull-right{
+	float: right;
+	margin-right: 1rem; 
+}
 
 .header > button {
     line-height: 2rem;
